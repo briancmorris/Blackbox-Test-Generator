@@ -15,22 +15,41 @@ public class TestCase extends Observable implements Serializable
 	/** Serial version UID. */
 	private static final long serialVersionUID = 7459L;
 	
+	/**
+	 * holds the test id
+	 */
 	private String testCaseID;
-	
+	/**
+	 * holds the creation date
+	 */
 	private Date creationDate;
-	
+	/**
+	 * holds the description
+	 */
 	private String description;
-	
+	/**
+	 * holds the expected results
+	 */
 	private String expectedResult;
-	
+	/**
+	 * holds the actual results
+	 */
 	private String actualResults;
-	
+	/**
+	 * holds the last test date
+	 */
 	private Date lastTestedDate;
-	
+	/**
+	 * holds boolean for if it has been tested
+	 */
 	private boolean testedStatus;
-	
+	/**
+	 * holds boolean for if it is passing
+	 */
 	private boolean pass;
-	
+	/**
+	 * holds the test type
+	 */
 	private TestingType type;
 	
 	/**
