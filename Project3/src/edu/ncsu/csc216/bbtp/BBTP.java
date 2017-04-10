@@ -119,7 +119,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	/**
 	 * returns the test case list at index provided
 	 * @param index of test case list
-	 * @return
+	 * @return the list at the index
 	 */
 	public TestCaseList getTestCaseList(int index) 
 	{
@@ -130,7 +130,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 * returns the list of types
 	 * @return the list of types
 	 */
-	public TestingTypeList getTestTypeList() 
+	public TestingTypeList getTestingTypeList() 
 	{
 		return null;
 	}

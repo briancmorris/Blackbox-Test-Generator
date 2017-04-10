@@ -84,7 +84,7 @@ public class TestCase extends Observable implements Serializable
 	 * sets the creation date
 	 * @param creationDate the creationDate to set
 	 */
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDateTime(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 
@@ -120,7 +120,7 @@ public class TestCase extends Observable implements Serializable
 	 * sets the expected results
 	 * @param expectedResult the expectedResult to set
 	 */
-	public void setExpectedResult(String expectedResult) {
+	public void setExpectedResults(String expectedResult) {
 		this.expectedResult = expectedResult;
 	}
 
@@ -156,7 +156,7 @@ public class TestCase extends Observable implements Serializable
 	 * sets the last tested date
 	 * @param lastTestedDate the lastTestedDate to set
 	 */
-	public void setLastTestedDate(Date lastTestedDate) {
+	public void setLastTestedDateTime(Date lastTestedDate) {
 		this.lastTestedDate = lastTestedDate;
 	}
 
@@ -191,7 +191,7 @@ public class TestCase extends Observable implements Serializable
 	 * sets the type
 	 * @param type the type to set
 	 */
-	public void setType(TestingType type) {
+	public void setTestingType(TestingType type) {
 		this.type = type;
 	}
 

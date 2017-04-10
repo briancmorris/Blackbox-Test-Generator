@@ -41,6 +41,16 @@ public class TestCaseListPane implements Serializable, Observer
 	}
 	
 	/**
+	 * returns the table model
+	 * @return the table model
+	 */
+	public TestCaseTableModel getTestCaseTableModel()
+	{
+		return null;	
+	}
+	
+	
+	/**
 	 * returns the table
 	 * @return the table
 	 */
