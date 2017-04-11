@@ -63,7 +63,7 @@ public class TestCase extends Observable implements Serializable
 	 * @param act actual results
 	 * @param pass true if it passed
 	 */
-	public TestCase(String desc, TestingType type, Date creation, 
+	public TestCase(String id, String desc, TestingType type, Date creation, 
 			 		String exp, boolean tested, Date lastTestDate,
 			 		String act, boolean pass)
 	{
@@ -75,7 +75,7 @@ public class TestCase extends Observable implements Serializable
 	 * returns the creation date
 	 * @return the creationDate
 	 */
-	public Date getCreationDate() {
+	public Date getCreationDateTime() {
 		return creationDate;
 	}
 
@@ -111,7 +111,7 @@ public class TestCase extends Observable implements Serializable
 	 * returns the expected results
 	 * @return the expectedResult
 	 */
-	public String getExpectedResult() {
+	public String getExpectedResults() {
 		return expectedResult;
 	}
 
@@ -147,7 +147,7 @@ public class TestCase extends Observable implements Serializable
 	 * returns the last tested date
 	 * @return the lastTestedDate
 	 */
-	public Date getLastTestedDate() {
+	public Date getLastTestedDateTime() {
 		return lastTestedDate;
 	}
 
@@ -182,7 +182,7 @@ public class TestCase extends Observable implements Serializable
 	 * returns the type
 	 * @return the type
 	 */
-	public TestingType getType() {
+	public TestingType getTestingType() {
 		return type;
 	}
 

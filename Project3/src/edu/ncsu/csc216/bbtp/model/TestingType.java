@@ -72,7 +72,7 @@ public class TestingType extends Observable implements Serializable
 	 * returns the testing type
 	 * @return the testingTypeId
 	 */
-	public String getTestingTypeId() {
+	public String getTestingTypeID() {
 		return testingTypeId;
 	}
 
