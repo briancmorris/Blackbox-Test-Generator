@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -20,7 +21,7 @@ import edu.ncsu.csc216.bbtp.model.TestingTypeList;
  * @author Brian and Nat
  *
  */
-public class TestCaseEditPane implements Serializable, Observer
+public class TestCaseEditPane extends JScrollPane implements Serializable, Observer
 {
 	/** Serial version UID. */
 	private static final long serialVersionUID = 5479139338455751629L;

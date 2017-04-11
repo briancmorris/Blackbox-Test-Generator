@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import edu.ncsu.csc216.bbtp.model.TestCaseList;
@@ -13,7 +14,7 @@ import edu.ncsu.csc216.bbtp.model.TestCaseList;
  * @author Brian and Nat
  *
  */
-public class TestCaseListPane implements Serializable, Observer
+public class TestCaseListPane extends JScrollPane implements Serializable, Observer
 {
 	
 	/** Serial version UID. */
