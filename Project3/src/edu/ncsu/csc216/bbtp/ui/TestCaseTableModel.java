@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * GUI for the Model
- * @author Brian and Nat
- *
+ * @author Brian Morris
+ * @author Nat Ellis
  */
 public class TestCaseTableModel implements Serializable
 {
@@ -43,8 +43,11 @@ public class TestCaseTableModel implements Serializable
 		return 0;
 	}
 	
-	/*
-	 * return the columns name
+	//TODO improve this Javadoc
+	/**
+	 * Enter description.
+	 * @param index something
+	 * @return something
 	 */
 	public String getColumnName(int index)
 	{

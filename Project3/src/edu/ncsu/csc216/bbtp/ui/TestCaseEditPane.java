@@ -18,7 +18,8 @@ import edu.ncsu.csc216.bbtp.model.TestingTypeList;
 
 /**
  * GUI for the edit panel
- * @author Brian and Nat
+ * @author Brian Morris
+ * @author Nat Ellis
  *
  */
 public class TestCaseEditPane extends JScrollPane implements Serializable, Observer

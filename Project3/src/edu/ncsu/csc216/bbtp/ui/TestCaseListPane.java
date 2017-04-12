@@ -11,8 +11,8 @@ import edu.ncsu.csc216.bbtp.model.TestCaseList;
 
 /**
  * GUI for the list panel
- * @author Brian and Nat
- *
+ * @author Brian Morris
+ * @author Nat Ellis
  */
 public class TestCaseListPane extends JScrollPane implements Serializable, Observer
 {
