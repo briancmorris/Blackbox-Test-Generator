@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Arrays;
+// TODO add later
+//import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,7 +21,8 @@ import edu.ncsu.csc216.bbtp.model.TestCaseList;
  * structures that contain TestCase and TestingType objects and acts as the
  * controller between the model and the GUI presentation view.
  * 
- * @author Brian and Nat
+ * @author Brian Morris
+ * @author Nat Ellis
  */
 public class BBTP extends Observable implements Serializable, Observer {
 

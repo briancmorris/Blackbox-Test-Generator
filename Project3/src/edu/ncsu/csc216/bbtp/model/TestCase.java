@@ -54,6 +54,7 @@ public class TestCase extends Observable implements Serializable
 	
 	/**
 	 * constructor for Test case
+	 * @param id the id of the test
 	 * @param desc description of the test
 	 * @param type type of the test
 	 * @param creation date test was made
