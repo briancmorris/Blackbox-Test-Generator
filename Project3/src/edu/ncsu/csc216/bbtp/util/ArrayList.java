@@ -3,51 +3,47 @@ package edu.ncsu.csc216.bbtp.util;
 import java.io.Serializable;
 
 /**
- * personalized array list
- * @author Brian and Nat
- *
+ * The ArrayList class stores provided objects in an array, with
+ * various getter and setter methods to improve ease of use.
+ * @author Brian Morris
+ * @author Nat Ellis
  */
-public class ArrayList implements List, Serializable
-{
+public class ArrayList implements List, Serializable {
 	
-	/** Serial version UID. */
+	/** Serial Version UID used to identify this object when performing IO operations */
 	private static final long serialVersionUID = 28592L;
-
+	/** Constant value used to resize a list */
 	private static final int RESIZE = 0;
-	
+	/** The array used to store values in this ArrayList */
 	private Object[] list;
-	
+	/** The number of elements in the list */
 	private int size;
 	
 	/**
-	 * basic constructor for the array list
+	 * The constructor for ArrayList initializes an empty list with
+	 * size 0.
 	 */
-	public ArrayList()
-	{
-		
+	public ArrayList() {
+	    this.size = RESIZE;
+	    this.list = new Object[10];
 	}
 	
 	/**
 	 * constructor with default size
 	 * @param size of the new list
 	 */
-	public ArrayList(int size)
-	{
+	public ArrayList(int size) {
 		
 	}
 	
 	@Override
-	public int size() 
-	{
-		// TODO Auto-generated method stub
-		return 0;
+	public int size() {
+		return size;
 	}
 
 	@Override
-	public boolean isEmpty() 
-	{
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isEmpty() {
+		return size == 0;
 	}
 
 	@Override
