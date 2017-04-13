@@ -12,15 +12,15 @@ public class ArrayList implements List, Serializable {
 	
 	/** Serial Version UID used to identify an instance of this class when performing IO operations */
 	private static final long serialVersionUID = 28592L;
-	/** Constant value used to resize a list */
+	/** Constant value used to resize the list array */
 	private static final int RESIZE = 10;
 	/** The array used to store values in this ArrayList */
 	private Object[] list;
-	/** The number of Objects in the list */
+	/** The number of Objects in the ArrayList */
 	private int size;
 	
 	/**
-	 * The constructor for ArrayList initializes an empty list with
+	 * The constructor for ArrayList initializes an empty ArrayList with
 	 * size 0.
 	 */
 	public ArrayList() {
@@ -29,7 +29,7 @@ public class ArrayList implements List, Serializable {
 	}
 	
 	/**
-	 * The constructor for ArrayList initializes an empty list with size 0.
+	 * The constructor for ArrayList initializes an empty ArrayList with size 0.
 	 * @param initialSize the initial storage capacity of the underlying array used
 	 *        to store objects.
 	 */
@@ -123,7 +123,7 @@ public class ArrayList implements List, Serializable {
      * @throws NullPointerException if the given Object is null
      * @throws IllegalArgumentException if the given Object is already contained in this ArrayList
      * @throws IndexOutOfBoundsException if the given index is less than 0 or greater than the size
-     *         of this list
+     *         of this ArrayList
      */
 	@Override
 	public void add(int index, Object element) {
