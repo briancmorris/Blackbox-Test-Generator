@@ -56,9 +56,6 @@ public class LinkedList implements List, Serializable {
 	@Override
 	public boolean contains(Object o) {
 		Node current = front;
-		if (current == null) {
-		    return false;
-		}
 		while (current != null) {
 		    if (current.value.equals(o)) {
 		        return true;
