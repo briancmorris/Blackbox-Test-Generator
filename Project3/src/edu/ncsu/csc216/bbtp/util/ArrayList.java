@@ -24,8 +24,7 @@ public class ArrayList implements List, Serializable {
 	 * size 0.
 	 */
 	public ArrayList() {
-	    this.size = 0;
-	    this.list = new Object[RESIZE];
+	    this(RESIZE);
 	}
 	
 	/**
@@ -35,6 +34,7 @@ public class ArrayList implements List, Serializable {
 	 */
 	public ArrayList(int initialSize) {
 		this.list = new Object[initialSize];
+		this.size = 0;
 	}
 	
 	/**

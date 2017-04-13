@@ -59,33 +59,36 @@ public class ArrayListTest {
         //Test Array Growth
         assertTrue(test.add("test2"));
         assertEquals(2, test.size());
-        assertTrue(test.get(1).equals("test2"));
         assertTrue(test.add("test3"));
         assertEquals(3, test.size());
-        assertTrue(test.get(2).equals("test3"));
         assertTrue(test.add("test4"));
         assertEquals(4, test.size());
-        assertTrue(test.get(3).equals("test4"));
         assertTrue(test.add("test5"));
         assertEquals(5, test.size());
-        assertTrue(test.get(4).equals("test5"));
         assertTrue(test.add("test6"));
         assertEquals(6, test.size());
-        assertTrue(test.get(5).equals("test6"));
         assertTrue(test.add("test7"));
         assertEquals(7, test.size());
-        assertTrue(test.get(6).equals("test7"));
         assertTrue(test.add("test8"));
         assertEquals(8, test.size());
-        assertTrue(test.get(7).equals("test8"));
         assertTrue(test.add("test9"));
         assertEquals(9, test.size());
-        assertTrue(test.get(8).equals("test9"));
         assertTrue(test.add("test10"));
         assertEquals(10, test.size());
-        assertTrue(test.get(9).equals("test10"));
         assertTrue(test.add("test11"));
         assertEquals(11, test.size());
+        
+        // Ensure that array growth kept everything in the correct order
+        assertTrue(test.get(0).equals("test1"));
+        assertTrue(test.get(1).equals("test2"));
+        assertTrue(test.get(2).equals("test3"));
+        assertTrue(test.get(3).equals("test4"));
+        assertTrue(test.get(4).equals("test5"));
+        assertTrue(test.get(5).equals("test6"));
+        assertTrue(test.get(6).equals("test7"));
+        assertTrue(test.get(7).equals("test8"));
+        assertTrue(test.get(8).equals("test9"));
+        assertTrue(test.get(9).equals("test10"));
         assertTrue(test.get(10).equals("test11"));
         
         // Error Handling
