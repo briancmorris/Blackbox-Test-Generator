@@ -33,7 +33,9 @@ public class TestingType extends Observable implements Serializable
 	 */
 	public TestingType(String name, String description, String id)
 	{
-		
+		setName(name);
+		setDescription(description);
+		setTestingTypeId(id);
 	}
 
 	/**
@@ -48,8 +50,16 @@ public class TestingType extends Observable implements Serializable
 	 * sets the name
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	public void setName(String name) 
+	{
+		if ((!(name.trim().length() > 0) || name == null))
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.name = name;
+		
+		notifyObservers();
 	}
 
 	/**
@@ -64,8 +74,11 @@ public class TestingType extends Observable implements Serializable
 	 * sets the description
 	 * @param description the description to set
 	 */
-	public void setDescription(String description) {
+	public void setDescription(String description) 
+	{	
 		this.description = description;
+		
+		notifyObservers();
 	}
 
 	/**
@@ -80,8 +93,16 @@ public class TestingType extends Observable implements Serializable
 	 * sets the testing type id
 	 * @param testingTypeId the testingTypeId to set
 	 */
-	private void setTestingTypeId(String testingTypeId) {
+	private void setTestingTypeId(String testingTypeId) 
+	{
+		if ((!(testingTypeId.trim().length() > 0) || testingTypeId == null))
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.testingTypeId = testingTypeId;
+		
+		notifyObservers();
 	}
 
 	/* (non-Javadoc)
@@ -109,16 +130,6 @@ public class TestingType extends Observable implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		TestingType other = (TestingType) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (testingTypeId == null) {
 			if (other.testingTypeId != null)
 				return false;
@@ -132,17 +143,17 @@ public class TestingType extends Observable implements Serializable
 	 */
 	@Override
 	public String toString() {
-		return "TestingType [name=" + name + ", description=" + description + ", testingTypeId=" + testingTypeId + "]";
+		return "TestingType [name=" + name + ", description=" + description + ", Id=" + testingTypeId + "]";
 	}
 	
 	/**
 	 * compares this test type to input
 	 * @param input to compare this with
-	 * @return 1 if true 
+	 * @return 0 if equal
 	 */
 	public int compareTo(TestingType input)
 	{
-		return 0;
+		return this.getTestingTypeID().compareTo(input.getTestingTypeID());
 	}
 	
 	

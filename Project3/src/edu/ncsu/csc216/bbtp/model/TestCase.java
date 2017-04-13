@@ -18,39 +18,39 @@ public class TestCase extends Observable implements Serializable
 	/**
 	 * holds the test id
 	 */
-	private String testCaseID;
+	private String testCaseID = null;
 	/**
 	 * holds the creation date
 	 */
-	private Date creationDate;
+	private Date creationDate = null;
 	/**
 	 * holds the description
 	 */
-	private String description;
+	private String description = null;
 	/**
 	 * holds the expected results
 	 */
-	private String expectedResult;
+	private String expectedResult = null;
 	/**
 	 * holds the actual results
 	 */
-	private String actualResults;
+	private String actualResults = null;
 	/**
 	 * holds the last test date
 	 */
-	private Date lastTestedDate;
+	private Date lastTestedDate = null;
 	/**
 	 * holds boolean for if it has been tested
 	 */
-	private boolean testedStatus;
+	private boolean testedStatus = false;
 	/**
 	 * holds boolean for if it is passing
 	 */
-	private boolean pass;
+	private boolean pass = false;
 	/**
 	 * holds the test type
 	 */
-	private TestingType type;
+	private TestingType type = null;
 	
 	/**
 	 * constructor for Test case
@@ -68,6 +68,15 @@ public class TestCase extends Observable implements Serializable
 			 		String exp, boolean tested, Date lastTestDate,
 			 		String act, boolean pass)
 	{
+		setTestCaseID(id);
+		setDescription(desc);
+		setTestingType(type);
+		setCreationDateTime(creation);
+		setExpectedResults(exp);
+		setTestedStatus(tested);
+		setLastTestedDateTime(lastTestDate);
+		setActualResults(act);
+		setPass(pass);
 		
 	}
 
@@ -85,8 +94,16 @@ public class TestCase extends Observable implements Serializable
 	 * sets the creation date
 	 * @param creationDate the creationDate to set
 	 */
-	public void setCreationDateTime(Date creationDate) {
+	public void setCreationDateTime(Date creationDate) 
+	{
+		if (creationDate == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.creationDate = creationDate;
+		
+		notifyObservers();
 	}
 
 
@@ -103,8 +120,16 @@ public class TestCase extends Observable implements Serializable
 	 * sets the description
 	 * @param description the description to set
 	 */
-	public void setDescription(String description) {
+	public void setDescription(String description) 
+	{
+		if (!(description.trim().length() > 0) || description == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.description = description;
+		
+		notifyObservers();
 	}
 
 
@@ -121,8 +146,16 @@ public class TestCase extends Observable implements Serializable
 	 * sets the expected results
 	 * @param expectedResult the expectedResult to set
 	 */
-	public void setExpectedResults(String expectedResult) {
+	public void setExpectedResults(String expectedResult) 
+	{
+		if (!(expectedResult.trim().length() > 0) || expectedResult == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.expectedResult = expectedResult;
+		
+		notifyObservers();
 	}
 
 
@@ -139,8 +172,16 @@ public class TestCase extends Observable implements Serializable
 	 * sets the actual results
 	 * @param actualResults the actualResults to set
 	 */
-	public void setActualResults(String actualResults) {
+	public void setActualResults(String actualResults) 
+	{
+		if (testedStatus && (actualResults == null || !(actualResults.trim().length() > 0)))
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.actualResults = actualResults;
+		
+		notifyObservers();
 	}
 
 
@@ -157,8 +198,16 @@ public class TestCase extends Observable implements Serializable
 	 * sets the last tested date
 	 * @param lastTestedDate the lastTestedDate to set
 	 */
-	public void setLastTestedDateTime(Date lastTestedDate) {
+	public void setLastTestedDateTime(Date lastTestedDate) 
+	{
+		if (lastTestedDate == null && testedStatus)
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.lastTestedDate = lastTestedDate;
+	
+		notifyObservers();
 	}
 
 	/**
@@ -174,8 +223,11 @@ public class TestCase extends Observable implements Serializable
 	 * sets true if it is passing
 	 * @param pass the pass to set
 	 */
-	public void setPass(boolean pass) {
+	public void setPass(boolean pass) 
+	{
 		this.pass = pass;
+		
+		notifyObservers();
 	}
 
 
@@ -192,8 +244,16 @@ public class TestCase extends Observable implements Serializable
 	 * sets the type
 	 * @param type the type to set
 	 */
-	public void setTestingType(TestingType type) {
+	public void setTestingType(TestingType type) 
+	{
+		if (type == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.type = type;
+		
+		notifyObservers();
 	}
 
 
@@ -201,7 +261,8 @@ public class TestCase extends Observable implements Serializable
 	 * returns the tested status
 	 * @return the testedStatus
 	 */
-	public boolean tested() {
+	public boolean tested() 
+	{
 		return testedStatus;
 	}
 
@@ -210,8 +271,11 @@ public class TestCase extends Observable implements Serializable
 	 * sets the tested status
 	 * @param testedStatus the testedStatus to set
 	 */
-	public void setTestedStatus(boolean testedStatus) {
+	public void setTestedStatus(boolean testedStatus) 
+	{
 		this.testedStatus = testedStatus;
+		
+		notifyObservers();
 	}
 
 
@@ -228,7 +292,13 @@ public class TestCase extends Observable implements Serializable
 	 * sets the test case id
 	 * @param testCaseID the testCaseID to set
 	 */
-	private void setTestCaseID(String testCaseID) {
+	private void setTestCaseID(String testCaseID) 
+	{
+		if ((!(testCaseID.trim().length() > 0) || testCaseID == null))
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.testCaseID = testCaseID;
 	}
 
@@ -257,7 +327,8 @@ public class TestCase extends Observable implements Serializable
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) 
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -265,56 +336,24 @@ public class TestCase extends Observable implements Serializable
 		if (getClass() != obj.getClass())
 			return false;
 		TestCase other = (TestCase) obj;
-		if (actualResults == null) {
-			if (other.actualResults != null)
-				return false;
-		} else if (!actualResults.equals(other.actualResults))
-			return false;
-		if (creationDate == null) {
-			if (other.creationDate != null)
-				return false;
-		} else if (!creationDate.equals(other.creationDate))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (expectedResult == null) {
-			if (other.expectedResult != null)
-				return false;
-		} else if (!expectedResult.equals(other.expectedResult))
-			return false;
-		if (lastTestedDate == null) {
-			if (other.lastTestedDate != null)
-				return false;
-		} else if (!lastTestedDate.equals(other.lastTestedDate))
-			return false;
-		if (pass != other.pass)
-			return false;
 		if (testCaseID == null) {
 			if (other.testCaseID != null)
 				return false;
 		} else if (!testCaseID.equals(other.testCaseID))
 			return false;
-		if (testedStatus != other.testedStatus)
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
+		
 		return true;
 	}
 	
 	/**
 	 * compares this test case to input
 	 * @param input to compare this with
-	 * @return 1 if true 
+	 * @return 0 if equal 
 	 */
 	public int compareTo(TestCase input)
 	{
-		return 0;
+		return this.getLastTestedDateTime().compareTo(input.getLastTestedDateTime());
+		
 	}
 	
 }

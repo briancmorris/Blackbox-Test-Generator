@@ -12,11 +12,47 @@ import org.junit.Test;
 public class TestingTypeTest {
 
     /**
-     * Default test method.
+     * test constructor getters and setters
      */
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testType() 
+	{
+		TestingType test = null;
+		//test invalid constructs
+		try
+		{
+			test = new TestingType("", "", "");
+			fail();
+		}
+		catch (Exception e) 
+		{
+			assertTrue(test == null);
+		}
+		try 
+		{
+			test = new TestingType("test", "", "");
+			fail();
+		} catch (Exception e) {
+			assertTrue(test == null);
+		}
+		try 
+		{
+			test = new TestingType("test", "test", "");
+			fail();
+		} catch (Exception e) {
+			assertTrue(test == null);
+		}
+		
+		test = new TestingType("name", "description", "ID");
+		TestingType test2 = new TestingType("name", "description", "ID");
+		
+		assertEquals("name", test.getName());
+		assertEquals("description", test.getDescription());
+		assertEquals("ID", test.getTestingTypeID());
+		
+		assertTrue(test.equals(test2));
+		assertTrue(0 == test.compareTo(test2));
+		assertEquals(test.toString(), test2.toString());
 	}
 
 }
