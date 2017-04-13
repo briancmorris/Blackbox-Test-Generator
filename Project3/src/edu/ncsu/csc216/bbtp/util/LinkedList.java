@@ -56,11 +56,14 @@ public class LinkedList implements List, Serializable {
 	@Override
 	public boolean contains(Object o) {
 		Node current = front;
-		while (current != null && current.next != null) {
+		if (current == null) {
+		    return false;
+		}
+		while (current != null) {
 		    if (current.value.equals(o)) {
 		        return true;
 		    }
-		    current = front.next;
+		    current = current.next;
 		}
 		return false;
 	}
@@ -204,11 +207,11 @@ public class LinkedList implements List, Serializable {
 	public int indexOf(Object o) {
 		Node current = front;
 		int counter = 0;
-	    while(front != null && front.next != null) {
+	    while(current != null) {
 	        if (current.value.equals(o)) {
 	            return counter;
 	        }
-	        current = front.next;
+	        current = current.next;
 	        counter++;
 	    }
 		return -1;
