@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
+import edu.ncsu.csc216.bbtp.util.LinkedList;
+
 /**
  * A basic java object for holding a list of test cases
  * @author Brian and Nat
@@ -24,12 +26,17 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	/**
 	 * stores the next test case number
 	 */
-	private int nextTestCaseNum;
+	private int nextTestCaseNum = 1;
 	
 	/**
 	 * stores the list ID
 	 */
 	private String testCaseListID;
+	
+	/**
+	 * holds the list of cases
+	 */
+	private LinkedList list;
 	
 	/**
 	 * Constructs a test case list
@@ -38,8 +45,10 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public TestCaseList(String name, String testCaseListID) 
 	{
-		this.name = name;
-		this.testCaseListID = testCaseListID;
+		setName(name); 
+		setTestCaseListID(testCaseListID);
+		nextTestCaseNum = 1;
+		list = new LinkedList();
 	}
 	
 	/**
@@ -58,7 +67,12 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public void setName(String name) 
 	{
+		if (!(name.trim().length() > 0) || name == null)
+		{
+			throw new IllegalArgumentException();
+		}
 		this.name = name;
+		notifyObservers();
 	}
 	
 	/**
@@ -76,7 +90,13 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	private void setTestCaseListID(String testCaseListID) 
 	{
+		if (!(testCaseListID.trim().length() > 0) || testCaseListID == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		
 		this.testCaseListID = testCaseListID;
+		notifyObservers();
 	}
 
 	/**
@@ -112,7 +132,47 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 			                   String exp, boolean tested, Date lastTestDate,
 			                   String act, boolean pass) 
 	{
-		return false;
+		try
+		{
+			TestCase newTestCase = new TestCase(getTestCaseListID() + "-TC" + getNextTestCaseNum(), desc, type,
+												creation, exp, tested, lastTestDate, act, pass);
+			if (list.size() == 0)
+			{
+				list.add(newTestCase);
+			}
+			else 
+			{
+				int indexToAdd = 0;
+				TestCase compare = (TestCase) list.get(0);
+				for(int i = 0; i < list.size(); i++)
+				{
+					compare = (TestCase) list.get(i);
+					
+					if(newTestCase.getLastTestedDateTime() == null || compare.getLastTestedDateTime() == null)
+					{
+						indexToAdd = i + 1;
+					}
+					else if (compare.compareTo(newTestCase) == 1)
+					{
+						indexToAdd = i + 1;
+					}
+					else if(compare.compareTo(newTestCase) == 0)
+					{
+						indexToAdd = i + 1;
+					}
+				}
+				list.add(indexToAdd, newTestCase);
+			}
+			
+			incNextTestCaseNum();
+			notifyObservers();
+			return true;
+		}
+		catch (Exception e) 
+		{
+			return false;
+		}
+		
 	}
 	
 	/**
@@ -122,17 +182,31 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public TestCase getTestCaseAt(int index) 
 	{
-		return null;
+		if (index < 0 || index >= size())
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		return (TestCase) list.get(index);
 	}
 	
 	/**
 	 * returns the index of the test case that matches the string
-	 * @param testCaseString test case to look for
+	 * @param testCaseID test case to look for
 	 * @return the index of the test case that matches the string
 	 */
-	public int indexOf(String testCaseString) 
+	public int indexOf(String testCaseID) 
 	{
-		return 0;
+		int out = -1;
+		TestCase compare;
+		for (int i = 0; i < list.size(); i++)
+		{
+			compare = (TestCase) list.get(i);
+			if (compare.getTestCaseID().equals(testCaseID))
+			{
+				out = i;
+			}
+		}
+		return out;
 	}
 	
 	/** 
@@ -141,7 +215,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public int size() 
 	{
-		return 0;
+		return list.size();
 	}
 	
 	/**
@@ -150,7 +224,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public boolean isEmpty() 
 	{
-		return false;
+		return list.size() == 0;
 	}
 	
 	/**
@@ -160,24 +234,51 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 	 */
 	public TestCase removeTestCaseAt(int index) 
 	{
-		return null;
+		if (index < 0 || index >= size())
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		TestCase out = (TestCase) list.remove(index);
+		notifyObservers();
+		return out;
 	}
 	
 	/**
 	 * removes the test case that matches the string
-	 * @param testCaseString test case to remove
+	 * @param testCaseID test case to remove
 	 * @return true if removed
 	 */
-	public boolean removeTestCase(String testCaseString) 
+	public boolean removeTestCase(String testCaseID) 
 	{
+		int index = indexOf(testCaseID);
+		if (index != -1)
+		{
+			removeTestCaseAt(index);
+			notifyObservers();
+			return true;
+		}
 		return false;
 	}
 	
 	@Override
 	public Object[][] get2DArray() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Object[][] out = new Object[list.size()][9];
+		for (int i = 0 ; i < list.size(); i++)
+		{
+			TestCase next = (TestCase) list.get(i);
+			out[i][0] = next.getTestCaseID();
+			out[i][1] = next.getDescription();
+			out[i][2] = next.getTestingType();
+			out[i][3] = next.getCreationDateTime();
+			out[i][4] = next.getLastTestedDateTime();
+			out[i][5] = next.tested();
+			out[i][6] = next.getExpectedResults();
+			out[i][7] = next.getActualResults();
+			out[i][8] = next.pass();
+		}
+		
+		return out;
 	}
 
 	@Override

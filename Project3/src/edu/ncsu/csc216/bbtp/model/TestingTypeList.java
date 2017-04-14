@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
+import edu.ncsu.csc216.bbtp.util.ArrayList;
+
 /**
  * A basic java object for holding a list of types
  * @author Brian and Nat
@@ -14,17 +16,27 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 
 	/** Serial version UID. */
 	private static final long serialVersionUID = 984509L;
-	
+	/**
+	 * holds the list name
+	 */
 	private String name;
-	
-	private int nextTestingTypeNum;
+	/**
+	 * holds the next type num
+	 */
+	private int nextTestingTypeNum = 1;
+	/**
+	 * holds the list of types
+	 */
+	private ArrayList list;
 	
 	/**
 	 * constructor for the type list
 	 */
 	public TestingTypeList()
 	{
-		
+		list = new ArrayList();
+		this.name = "Testing Types";
+		nextTestingTypeNum = 1;
 	}
 	
 	/**
@@ -44,7 +56,21 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public boolean addTestingType(String name, String description)
 	{
-		return false;
+		
+		try
+		{
+			TestingType newType = new TestingType(name, description, "TT" + getNextTestingTypeNum());
+			list.add(newType);
+			incNextTestingTypeNum();
+			notifyObservers();
+		}
+		catch (Exception e) 
+		{
+			return false;
+		}
+		
+		
+		return true;
 	}
 	
 	/**
@@ -54,17 +80,31 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public TestingType getTestingTypeAt(int index)
 	{
-		return null;
+		if (index < 0 || index >= size())
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		return (TestingType) list.get(index);
 	}
 	
 	/**
-	 * return the index of the type provided
+	 * return the ID of the type provided
 	 * @param input the type
 	 * @return the index
 	 */
 	public int indexOf(String input)
 	{
-		return 0;
+		int out = -1;
+		TestingType compare;
+		for (int i = 0; i < list.size(); i++)
+		{
+			compare = (TestingType) list.get(i);
+			if (compare.getTestingTypeID().equals(input))
+			{
+				out = i;
+			}
+		}
+		return out;
 	}
 
 	/**
@@ -74,7 +114,17 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public int indexOfName(String name)
 	{
-		return 0;
+		int out = -1;
+		TestingType compare;
+		for (int i = 0; i < list.size(); i++)
+		{
+			compare = (TestingType) list.get(i);
+			if (compare.getName().equals(name))
+			{
+				out = i;
+			}
+		}
+		return out;
 	}
 	
 	/**
@@ -83,7 +133,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public int size()
 	{
-		return 0;
+		return list.size();
 	}
 	
 	/**
@@ -92,7 +142,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public boolean isEmpty()
 	{
-		return false;
+		return list.size() == 0;
 	}
 	
 	/**
@@ -102,16 +152,29 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	public TestingType removeTestingTypeAt(int index)
 	{
-		return null;
+		if (index < 0 || index >= size())
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		TestingType out = (TestingType) list.remove(index);
+		notifyObservers();
+		return out;
 	}
 	
 	/**
 	 * removes the testing type
-	 * @param input type to remove
+	 * @param input Name of type to remove
 	 * @return true if removed
 	 */
 	public boolean removeTestingType(String input)
 	{
+		int index = indexOfName(input);
+		if (index != -1)
+		{
+			removeTestingTypeAt(index);
+			notifyObservers();
+			return true;
+		}
 		return false;
 	}
 	
@@ -121,7 +184,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	 */
 	private int getNextTestingTypeNum()
 	{
-		return 0;
+		return nextTestingTypeNum;
 	}
 	
 	/**
@@ -139,9 +202,18 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
 	}
 
 	@Override
-	public Object[][] get2DArray() {
-		// TODO Auto-generated method stub
-		return null;
+	public Object[][] get2DArray() 
+	{
+		Object[][] out = new Object[list.size()][3];
+		for (int i = 0 ; i < list.size(); i++)
+		{
+			TestingType next = (TestingType) list.get(i);
+			out[i][0] = next.getTestingTypeID();
+			out[i][1] = next.getName();
+			out[i][2] = next.getDescription();
+		}
+		
+		return out;
 	}
 
 }
