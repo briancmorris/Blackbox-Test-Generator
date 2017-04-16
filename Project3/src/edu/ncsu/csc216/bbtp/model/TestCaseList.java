@@ -48,10 +48,11 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
      */
     public TestCaseList(String name, String testCaseListID) {
         
+        this.nextTestCaseNum = 1;
+        this.list = new LinkedList();
         setName(name);
         setTestCaseListID(testCaseListID);
-        this.nextTestCaseNum = 1;
-        list = new LinkedList();
+        
 
         setChanged();
         notifyObservers(this);
