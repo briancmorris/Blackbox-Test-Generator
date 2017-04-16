@@ -47,9 +47,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
      *            id of the list
      */
     public TestCaseList(String name, String testCaseListID) {
-        if (testCaseListID == null || testCaseListID.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
+        
         setName(name);
         setTestCaseListID(testCaseListID);
         this.nextTestCaseNum = 1;
@@ -99,7 +97,12 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
      *            ID to set
      */
     private void setTestCaseListID(String testCaseListID) {
+        if (testCaseListID == null || testCaseListID.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         this.testCaseListID = testCaseListID;
+        setChanged();
+        notifyObservers(this);
     }
 
     /**
