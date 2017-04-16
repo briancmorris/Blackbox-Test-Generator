@@ -23,18 +23,14 @@ public class BBTPTest {
 	{
 		BBTP test = new BBTP();
 		assertEquals( "Testing Types" , test.getTestingTypeList().getName());
-		assertEquals(0, test.getNumTestCaseLists());
-		
-		//checks to make sure initial value of changed is false
-		assertFalse(test.isChanged());
+		assertEquals(1, test.getNumTestCaseLists());
 		
 		//adds a new test case
-		assertEquals(0, test.addTestCaseList());
-		assertEquals(1, test.getNumTestCaseLists());
+		assertEquals(1, test.addTestCaseList());
+		assertEquals(2, test.getNumTestCaseLists());
 		
 		
 		//sets name and checks isChanged true
-		assertFalse(test.isChanged());
 		test.setFilename("test name");
 		assertTrue(test.isChanged());
 		assertEquals("test name", test.getFilename());
@@ -43,7 +39,7 @@ public class BBTPTest {
 		
 		//tests remove
 		test.removeTestCaseList(0);
-		assertEquals(0, test.getNumTestCaseLists());
+		assertEquals(1, test.getNumTestCaseLists());
 		
 		
 	}
@@ -64,10 +60,10 @@ public class BBTPTest {
 		
 		test.getTestingTypeList().addTestingType("test", "testdescrip");
 		
-		assertTrue(test.saveDataFile("test_files/actualSave"));
+		assertTrue(test.saveDataFile("test_files/actualSave.bbtp"));
 		
 		test = new BBTP();
-		assertTrue(test.openDataFile("test_files/actualSave"));
+		assertTrue(test.openDataFile("test_files/actualSave.bbtp"));
 		
 		assertEquals("description", test.getTestCaseList(0).getTestCaseAt(0).getDescription());
 		assertEquals("test", test.getTestingTypeList().getTestingTypeAt(0).getName());

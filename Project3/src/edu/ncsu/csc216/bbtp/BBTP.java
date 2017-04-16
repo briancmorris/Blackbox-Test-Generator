@@ -51,7 +51,14 @@ public class BBTP extends Observable implements Serializable, Observer {
      */
     public BBTP() 
     {
-		
+    	testCases = new TestCaseList[RESIZE];
+    	numLists = 0;
+    	testingTypes = new TestingTypeList();
+    	testingTypes.addObserver(this);
+    	changed = false;
+    	nextTestCaseListNum = 0;
+    	addTestCaseList();
+    	notifyObservers(this);
 	}
 
     /**
@@ -60,7 +67,7 @@ public class BBTP extends Observable implements Serializable, Observer {
      */
     public boolean isChanged()
     {
-    	return false;
+    	return changed;
     }
  
     /**
@@ -88,7 +95,14 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public void setFilename(String filename) 
 	{
+		if (filename == null || filename.trim().isEmpty())
+		{
+			throw new IllegalArgumentException();
+		}
 		this.filename = filename;
+		
+		setChanged(true);
+		notifyObservers(this);
 	}
 	
 	/**
@@ -115,7 +129,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public int getNumTestCaseLists() 
 	{
-		return 0;
+		return numLists;
 	}
  
 	/**
@@ -125,7 +139,12 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public TestCaseList getTestCaseList(int index) 
 	{
-		return null;
+		if (index >= numLists || index < 0)
+		{
+			throw new IllegalArgumentException();
+		}
+		
+		return testCases[index];
 	}
 	
 	/**
@@ -134,7 +153,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public TestingTypeList getTestingTypeList() 
 	{
-		return null;
+		return testingTypes;
 	}
 
 	/**
@@ -143,7 +162,15 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public int addTestCaseList()
 	{
-		return 0;
+		testCases[numLists] = new TestCaseList( "TCL" + getNextTestCaseListNum(), "New List");
+		testCases[numLists].addObserver(this);
+		setChanged();
+        incNextTestCaseListNum();
+        numLists++;
+        
+        setChanged(true);
+        notifyObservers(this);
+		return numLists - 1;
 	}
 	
 	/**
@@ -152,7 +179,17 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public void removeTestCaseList(int index)
 	{
+		if (index < 0 || index >= numLists) {
+	        throw new IndexOutOfBoundsException();
+	    }
+		testCases[index].deleteObserver(this);
+		for (int i = index; i < numLists; i++) {
+			testCases[i] = testCases[i + 1];
+		}
+		numLists--;
 		
+		setChanged(true);
+        notifyObservers(this);
 	}
 
 	/**
@@ -244,10 +281,9 @@ public class BBTP extends Observable implements Serializable, Observer {
     }
 
 	@Override
-	public void update(Observable arg0, Object arg1) 
+	public void update(Observable o, Object arg) 
 	{
-		// TODO Auto-generated method stub
-		
+		notifyObservers(arg);
 	}
 
 }
