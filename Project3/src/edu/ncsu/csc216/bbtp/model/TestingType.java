@@ -36,6 +36,9 @@ public class TestingType extends Observable implements Serializable
 		setName(name);
 		setDescription(description);
 		setTestingTypeId(id);
+		
+		setChanged();
+        notifyObservers(this);
 	}
 
 	/**
@@ -59,7 +62,8 @@ public class TestingType extends Observable implements Serializable
 		
 		this.name = name;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 	/**
@@ -78,7 +82,8 @@ public class TestingType extends Observable implements Serializable
 	{	
 		this.description = description;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 	/**
@@ -102,7 +107,8 @@ public class TestingType extends Observable implements Serializable
 		
 		this.testingTypeId = testingTypeId;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 	/* (non-Javadoc)

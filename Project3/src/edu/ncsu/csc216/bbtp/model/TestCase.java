@@ -78,6 +78,8 @@ public class TestCase extends Observable implements Serializable
 		setActualResults(act);
 		setPass(pass);
 		
+		setChanged();
+		notifyObservers(this);
 	}
 
 
@@ -103,7 +105,8 @@ public class TestCase extends Observable implements Serializable
 		
 		this.creationDate = creationDate;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 
@@ -129,7 +132,8 @@ public class TestCase extends Observable implements Serializable
 		
 		this.description = description;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 
@@ -155,7 +159,8 @@ public class TestCase extends Observable implements Serializable
 		
 		this.expectedResult = expectedResult;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 
@@ -181,7 +186,8 @@ public class TestCase extends Observable implements Serializable
 		
 		this.actualResults = actualResults;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 
@@ -207,7 +213,8 @@ public class TestCase extends Observable implements Serializable
 		
 		this.lastTestedDate = lastTestedDate;
 	
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 	/**
@@ -227,7 +234,8 @@ public class TestCase extends Observable implements Serializable
 	{
 		this.pass = pass;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 
@@ -253,7 +261,8 @@ public class TestCase extends Observable implements Serializable
 		
 		this.type = type;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 
@@ -275,7 +284,8 @@ public class TestCase extends Observable implements Serializable
 	{
 		this.testedStatus = testedStatus;
 		
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 
@@ -300,6 +310,8 @@ public class TestCase extends Observable implements Serializable
 		}
 		
 		this.testCaseID = testCaseID;
+		setChanged();
+        notifyObservers(this);
 	}
 
 
