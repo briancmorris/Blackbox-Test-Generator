@@ -49,6 +49,9 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		setTestCaseListID(testCaseListID);
 		nextTestCaseNum = 1;
 		list = new LinkedList();
+		
+		setChanged();
+        notifyObservers(this);
 	}
 	
 	/**
@@ -72,7 +75,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 			throw new IllegalArgumentException();
 		}
 		this.name = name;
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 	
 	/**
@@ -96,7 +100,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		}
 		
 		this.testCaseListID = testCaseListID;
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 	}
 
 	/**
@@ -147,28 +152,31 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 				for(int i = 0; i < list.size(); i++)
 				{
 					compare = (TestCase) list.get(i);
-					
-					if(newTestCase.getLastTestedDateTime() == null || compare.getLastTestedDateTime() == null)
-					{
-						indexToAdd = i + 1;
+					if(compare.compareTo(newTestCase) >= 0) {
+					    indexToAdd++;
 					}
-					else if (compare.compareTo(newTestCase) == 1)
-					{
-						indexToAdd = i + 1;
-					}
-					else if(compare.compareTo(newTestCase) == 0)
-					{
-						indexToAdd = i + 1;
-					}
+//					if(newTestCase.getLastTestedDateTime() == null || compare.getLastTestedDateTime() == null)
+//					{
+//						indexToAdd = i + 1;
+//					}
+//					else if (compare.compareTo(newTestCase) == 1)
+//					{
+//						indexToAdd = i + 1;
+//					}
+//					else if(compare.compareTo(newTestCase) == 0)
+//					{
+//						indexToAdd = i + 1;
+//					}
 				}
 				list.add(indexToAdd, newTestCase);
 			}
 			
 			incNextTestCaseNum();
-			notifyObservers();
+			setChanged();
+	        notifyObservers(this);
 			return true;
 		}
-		catch (Exception e) 
+		catch (IllegalArgumentException e) 
 		{
 			return false;
 		}
@@ -239,7 +247,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 			throw new IndexOutOfBoundsException();
 		}
 		TestCase out = (TestCase) list.remove(index);
-		notifyObservers();
+		setChanged();
+        notifyObservers(this);
 		return out;
 	}
 	
@@ -254,7 +263,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		if (index != -1)
 		{
 			removeTestCaseAt(index);
-			notifyObservers();
+			setChanged();
+	        notifyObservers(this);
 			return true;
 		}
 		return false;

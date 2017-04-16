@@ -125,7 +125,7 @@ public class TestCase extends Observable implements Serializable
 	 */
 	public void setDescription(String description) 
 	{
-		if (!(description.trim().length() > 0) || description == null)
+		if (description == null || description.trim().isEmpty())
 		{
 			throw new IllegalArgumentException();
 		}
@@ -152,7 +152,7 @@ public class TestCase extends Observable implements Serializable
 	 */
 	public void setExpectedResults(String expectedResult) 
 	{
-		if (!(expectedResult.trim().length() > 0) || expectedResult == null)
+		if ( expectedResult == null || expectedResult.trim().isEmpty())
 		{
 			throw new IllegalArgumentException();
 		}
@@ -179,7 +179,7 @@ public class TestCase extends Observable implements Serializable
 	 */
 	public void setActualResults(String actualResults) 
 	{
-		if (testedStatus && (actualResults == null || !(actualResults.trim().length() > 0)))
+		if (testedStatus && (actualResults == null || actualResults.trim().isEmpty()))
 		{
 			throw new IllegalArgumentException();
 		}
@@ -304,7 +304,7 @@ public class TestCase extends Observable implements Serializable
 	 */
 	private void setTestCaseID(String testCaseID) 
 	{
-		if ((!(testCaseID.trim().length() > 0) || testCaseID == null))
+		if (testCaseID == null || testCaseID.isEmpty())
 		{
 			throw new IllegalArgumentException();
 		}
