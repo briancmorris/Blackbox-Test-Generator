@@ -364,8 +364,23 @@ public class TestCase extends Observable implements Serializable
 	 */
 	public int compareTo(TestCase input)
 	{
-		return this.getLastTestedDateTime().compareTo(input.getLastTestedDateTime());
-		
+	    if (input == null) {
+	        throw new NullPointerException();
+	    }
+	    
+	    if (this.getLastTestedDateTime() == null) {
+	        if(input.getLastTestedDateTime() == null) {
+	            return 0;
+	        } else {
+	            return 1;
+	        }
+	    } else {
+	        if (input.getLastTestedDateTime() == null) {
+	            return -1;
+	        } else {
+	            return this.getLastTestedDateTime().compareTo(input.getLastTestedDateTime());
+	        }
+	    }
 	}
 	
 }
