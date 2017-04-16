@@ -67,11 +67,11 @@ public class TestCaseListTest {
 		assertTrue(testArray[0][7] == null);
 		assertTrue(testArray[0][8].equals(false));
 	
-		assertTrue(test.addTestCase("description", testType, testDate1, "expected", false, null, "actual", false));
-		assertTrue(test.addTestCase("description", testType, testDate2, "expected", true, testDate4, "actual", false));
-		assertTrue(test.addTestCase("description", testType, testDate3, "expected", false, null, "actual", false));
+		assertTrue(test.addTestCase("description", testType, testDate1, "expected", false, null, null, false));
+		assertTrue(test.addTestCase("description", testType, testDate2, "expected", true, testDate4, null, false));
+		assertTrue(test.addTestCase("description", testType, testDate3, "expected", false, null, null, false));
 		assertTrue(test.addTestCase("description", testType, testDate4, "expected", true, testDate5, "actual", false));
-		assertTrue(test.addTestCase("description", testType, testDate5, "expected", false, null, "actual", false));
+		assertTrue(test.addTestCase("description", testType, testDate5, "expected", false, null, null, false));
 		
 		assertTrue(test.removeTestCase("TCL-TC1"));
 		
