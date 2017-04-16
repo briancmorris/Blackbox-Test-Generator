@@ -155,7 +155,7 @@ public class LinkedList implements List, Serializable {
 	        for (int i = 0; i < index - 1; i++) {
 	            current = current.next;
 	        }
-	        current.next = new Node(element, current.next.next);
+	        current.next = new Node(element, current.next);
 	    }
 	    size++;
 	}
