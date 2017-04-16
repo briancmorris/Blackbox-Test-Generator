@@ -141,6 +141,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		{
 			TestCase newTestCase = new TestCase(getTestCaseListID() + "-TC" + getNextTestCaseNum(), desc, type,
 												creation, exp, tested, lastTestDate, act, pass);
+			newTestCase.addObserver(this);
+			
 			if (list.size() == 0)
 			{
 				list.add(newTestCase);
@@ -247,6 +249,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 			throw new IndexOutOfBoundsException();
 		}
 		TestCase out = (TestCase) list.remove(index);
+		out.deleteObserver(this);
 		setChanged();
         notifyObservers(this);
 		return out;
@@ -262,7 +265,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 		int index = indexOf(testCaseID);
 		if (index != -1)
 		{
-			removeTestCaseAt(index);
+			TestCase out = removeTestCaseAt(index);
+			out.deleteObserver(this);
 			setChanged();
 	        notifyObservers(this);
 			return true;
@@ -293,8 +297,9 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+	    if (list.contains(o)) {
+	        notifyObservers(arg);
+	    }
 	}
 
 }
