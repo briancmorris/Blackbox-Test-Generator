@@ -180,19 +180,6 @@ public class TestingType extends Observable implements Serializable {
         if (input == null) {
             throw new NullPointerException();
         }
-
-        if (this.getTestingTypeID() == null) {
-            if (input.getTestingTypeID() == null) {
-                return 0;
-            } else {
-                return 1;
-            }
-        } else {
-            if (input.getTestingTypeID() == null) {
-                return -1;
-            } else {
-                return this.getTestingTypeID().compareTo(input.getTestingTypeID());
-            }
-        }
+        return this.getTestingTypeID().compareTo(input.getTestingTypeID());
     }
 }
