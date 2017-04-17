@@ -213,6 +213,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     @Override
     public void update(Observable o, Object arg) {
         // TODO Auto-generated method stub
+        o = (TestingType) o;
         if (list.contains(o)) {
             notifyObservers(arg);
         }

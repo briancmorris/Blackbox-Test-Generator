@@ -296,6 +296,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 
     @Override
     public void update(Observable o, Object arg) {
+        o = (TestCase) o;
         if (list.contains(o)) {
             notifyObservers(arg);
         }
