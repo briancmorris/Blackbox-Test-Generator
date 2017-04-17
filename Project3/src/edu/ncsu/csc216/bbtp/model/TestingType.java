@@ -36,7 +36,7 @@ public class TestingType extends Observable implements Serializable {
      * @param id
      *            of the type
      */
-    public TestingType(String name, String description, String id) {
+    public TestingType( String id, String name, String description) {
         setName(name);
         setDescription(description);
         setTestingTypeId(id);
@@ -156,7 +156,7 @@ public class TestingType extends Observable implements Serializable {
         if (testingTypeId == null) {
             if (other.testingTypeId != null)
                 return false;
-        } else if (testingTypeId.equals(other.testingTypeId))
+        } else if (this.testingTypeId.equals(other.getTestingTypeID()))
             return true;
         return false;
     }

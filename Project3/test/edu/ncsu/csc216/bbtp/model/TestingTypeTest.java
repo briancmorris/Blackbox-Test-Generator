@@ -43,8 +43,8 @@ public class TestingTypeTest {
 			assertTrue(test == null);
 		}
 		
-		test = new TestingType("name", "description", "ID");
-		TestingType test2 = new TestingType("name", "description", "ID");
+		test = new TestingType("ID", "name", "description");
+		TestingType test2 = new TestingType( "ID", "name", "description");
 		
 		assertEquals("name", test.getName());
 		assertEquals("description", test.getDescription());
