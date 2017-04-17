@@ -79,7 +79,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
                     }
                 }
                 */
-                list.add(list.size(), newType);
+                list.add(newType);
             }
             incNextTestingTypeNum();
             setChanged();
