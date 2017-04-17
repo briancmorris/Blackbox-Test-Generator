@@ -68,6 +68,51 @@ public class TestingTypeListTest {
         
         
     }
+    
+    /**
+     * Tests the update method in TestingTypeList.
+     */
+    @Test
+    public void testRmove() 
+    {
+    	
+    	TestingTypeList test = new TestingTypeList();
+    	
+    	try 
+        {
+        	test.removeTestingTypeAt(0);
+        	fail();
+		} 
+        catch (Exception e) 
+        {
+			assertEquals(0, test.size());
+		}
+    	
+    	
+        test.addTestingType("TestType1", "test1");
+        test.addTestingType("TestType2", "test2");
+        test.addTestingType("TestType3", "test3");
+        test.addTestingType("TestType4", "test4");
+        test.addTestingType("TestType5", "test5");
+        test.addTestingType("TestType6", "test6");
+        test.addTestingType("TestType7", "test7");
+        
+        assertEquals("TestType4", test.removeTestingTypeAt(3).getName());
+        
+        try 
+        {
+        	test.removeTestingTypeAt(6);
+        	fail();
+		} 
+        catch (Exception e) 
+        {
+			assertEquals(6, test.size());
+		}
+        
+        
+        
+    }
+    
 
     /**
      * Tests the update method in TestingTypeList.

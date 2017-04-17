@@ -178,7 +178,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     {
         try 
         {
-        	if (list == null || index < 0 || index >= size()) 
+        	if (list == null || index < 0 || index >= size() || list.size() == 0) 
             {
                 throw new IndexOutOfBoundsException();
             }
