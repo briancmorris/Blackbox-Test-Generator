@@ -112,7 +112,8 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
      *            the type
      * @return the index
      */
-    public int indexOf(String input) {
+    public int indexOf(String input) 
+    {
         int out = -1;
         TestingType compare;
         for (int i = 0; i < list.size(); i++) {
@@ -131,13 +132,18 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
      *            of the type
      * @return the type
      */
-    public int indexOfName(String name) {
+    public int indexOfName(String name) 
+    {
         int out = -1;
         TestingType compare;
-        for (int i = 0; i < list.size(); i++) {
-            compare = (TestingType) list.get(i);
-            if (compare.getName().equals(name)) {
-                out = i;
+        
+        for (int i = 0; i < this.list.size(); i++) 
+        {
+            compare = (TestingType) this.list.get(i);
+            if (compare.getName().equals(name)) 
+            {
+            	//out = i;
+            	return list.indexOf(compare);
             }
         }
         return out;

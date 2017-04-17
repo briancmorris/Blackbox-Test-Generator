@@ -168,7 +168,7 @@ public class TestingType extends Observable implements Serializable {
      */
     @Override
     public String toString() {
-        return "TestingType [name=" + name + ", description=" + description + ", Id=" + testingTypeId + "]";
+        return name;
     }
 
     /**
