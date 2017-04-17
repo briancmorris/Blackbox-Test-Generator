@@ -234,4 +234,30 @@ public class LinkedListTest {
         assertEquals(4, test.indexOf("test5"));
         assertEquals(-1, test.indexOf("not in list"));
     }
+    
+    /**
+     * tests the shift for adding to index
+     */
+    @Test
+    public void testShift() 
+    {
+    	LinkedList test = new LinkedList();
+    	test.add("s1");
+    	test.add("s2");
+    	test.add(0, "s3");
+    	test.add(1, "s4");
+    	
+    	assertEquals("s3", test.get(0));
+    	assertEquals("s4", test.get(1));
+    	assertEquals("s1", test.get(2));
+    	assertEquals("s2", test.get(3));
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    }
+    
 }

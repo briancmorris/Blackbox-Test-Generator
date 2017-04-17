@@ -115,7 +115,7 @@ public class LinkedList implements List, Serializable {
 	    } else {
 	        Node current = front;
 	        for (int i = 0; i < index; i++) {
-	            current = front.next;
+	            current = current.next;
 	        }
 	        return current.value;
 	    }
