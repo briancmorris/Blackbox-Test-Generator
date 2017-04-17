@@ -55,13 +55,18 @@ public class TestingTypeListTest {
       
 
         test.addTestingType("TestType2", "test2");
-
+        test.addTestingType("TestType3", "test3");
+        
         testArray = test.get2DArray();
         assertTrue(testArray[1][0].equals("TT2"));
         assertTrue(testArray[1][1].equals("TestType2"));
         assertTrue(testArray[1][2].equals("test2")); 
         
-        assertTrue(test.removeTestingType("TestType"));
+        assertEquals( "TestType2", test.removeTestingTypeAt(1).getName());
+        
+        
+        
+        
     }
 
     /**
