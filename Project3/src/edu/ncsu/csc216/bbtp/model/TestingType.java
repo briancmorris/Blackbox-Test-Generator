@@ -46,7 +46,7 @@ public class TestingType extends Observable implements Serializable {
     }
 
     /**
-     * returns the name
+      * returns the name
      * 
      * @return the name
      */
@@ -64,11 +64,13 @@ public class TestingType extends Observable implements Serializable {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException();
         }
+        else
+        {
+        	this.name = name;
 
-        this.name = name;
-
-        setChanged();
-        notifyObservers(this);
+            setChanged();
+            notifyObservers(this);
+        }
     }
 
     /**
@@ -154,9 +156,9 @@ public class TestingType extends Observable implements Serializable {
         if (testingTypeId == null) {
             if (other.testingTypeId != null)
                 return false;
-        } else if (!testingTypeId.equals(other.testingTypeId))
-            return false;
-        return true;
+        } else if (testingTypeId.equals(other.testingTypeId))
+            return true;
+        return false;
     }
 
     /*
@@ -180,6 +182,19 @@ public class TestingType extends Observable implements Serializable {
         if (input == null) {
             throw new NullPointerException();
         }
-        return this.getTestingTypeID().compareTo(input.getTestingTypeID());
+
+        if (this.getTestingTypeID() == null) {
+            if (input.getTestingTypeID() == null) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            if (input.getTestingTypeID() == null) {
+                return -1;
+            } else {
+                return this.getTestingTypeID().compareTo(input.getTestingTypeID());
+            }
+        }
     }
 }
