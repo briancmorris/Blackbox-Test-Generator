@@ -55,9 +55,9 @@ public class BBTP extends Observable implements Serializable, Observer {
     	numLists = 0;
     	testingTypes = new TestingTypeList();
     	testingTypes.addObserver(this);
-    	changed = false;
     	nextTestCaseListNum = 0;
     	addTestCaseList();
+    	changed = false;
     	notifyObservers(this);
 	}
 

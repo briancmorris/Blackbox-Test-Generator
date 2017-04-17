@@ -156,6 +156,8 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
                 int indexToAdd = 0;
                 TestCase compare = (TestCase) list.get(0);
                 for (int i = 0; i < list.size(); i++) {
+                    
+                    //if (compare.compareTo(newTestCase < 0) add
                     compare = (TestCase) list.get(i);
                     if (compare.compareTo(newTestCase) >= 0) {
                         indexToAdd++;
@@ -298,6 +300,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
     public void update(Observable o, Object arg) {
         o = (TestCase) o;
         if (list.contains(o)) {
+            setChanged();
             notifyObservers(arg);
         }
     }

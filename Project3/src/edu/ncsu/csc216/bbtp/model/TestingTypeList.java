@@ -79,7 +79,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
                     }
                 }
                 */
-                list.add(list.size(), newType);
+                list.add(newType);
             }
             incNextTestingTypeNum();
             setChanged();
@@ -225,6 +225,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
         // TODO Auto-generated method stub
         o = (TestingType) o;
         if (list.contains(o)) {
+            setChanged();
             notifyObservers(arg);
         }
     }
