@@ -73,6 +73,7 @@ public class TestingTypeListTest {
         test.update(testValue, testValue);
         TestingType notInList = new TestingType("NotInList", "notinlist", "notinlist");
         test.update(notInList, notInList);
+        assertEquals(1, test.size());
     }
 
 }
