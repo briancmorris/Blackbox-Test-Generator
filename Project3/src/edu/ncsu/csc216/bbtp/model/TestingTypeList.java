@@ -66,7 +66,10 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
             newType.addObserver(this);
             if (list.size() == 0) {
                 list.add(newType);
-            } else {
+            } 
+            else 
+            {
+            	/*
                 int indexToAdd = 0;
                 TestingType compare = (TestingType) list.get(0);
                 for (int i = 0; i < list.size(); i++) {
@@ -75,7 +78,8 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
                         indexToAdd++;
                     }
                 }
-                list.add(indexToAdd, newType);
+                */
+                list.add(list.size(), newType);
             }
             incNextTestingTypeNum();
             setChanged();
