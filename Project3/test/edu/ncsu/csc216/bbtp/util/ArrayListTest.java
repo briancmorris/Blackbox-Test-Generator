@@ -20,6 +20,13 @@ public class ArrayListTest {
         assertEquals(0, test.size());
         test = new ArrayList(10);
         assertEquals(0, test.size());
+        
+        try {
+            test = new ArrayList(0);
+            fail("Did not throw IllegalArgumentException.");
+        } catch (IllegalArgumentException e) {
+            assertEquals(0, test.size());
+        }
     }
 
     /**
