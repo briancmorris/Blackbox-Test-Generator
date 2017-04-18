@@ -139,7 +139,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public TestCaseList getTestCaseList(int index) 
 	{
-		if (index >= numLists -1 || index < 0)
+		if (index >= numLists || index < 0)
 		{
 			throw new IllegalArgumentException();
 		}
