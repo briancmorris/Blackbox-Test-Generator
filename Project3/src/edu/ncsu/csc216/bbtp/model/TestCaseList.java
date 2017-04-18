@@ -145,47 +145,39 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
      */
     public boolean addTestCase(String desc, TestingType type, Date creation, String exp, boolean tested,
             Date lastTestDate, String act, boolean pass) {
-        try {
-            TestCase newTestCase = new TestCase(getTestCaseListID() + "-TC" + getNextTestCaseNum(), desc, type,
+        
+    	TestCase newTestCase = null;
+    	try {
+    		newTestCase = new TestCase(getTestCaseListID() + "-TC" + getNextTestCaseNum(), desc, type,
                     creation, exp, tested, lastTestDate, act, pass);
-            newTestCase.addObserver(this);
-
-            if (list.size() == 0) {
-                list.add(newTestCase);
-            } else {
-                int indexToAdd = 0;
-                TestCase compare = (TestCase) list.get(0);
-                for (int i = 0; i < list.size(); i++) {
-                    
-                    //if (compare.compareTo(newTestCase < 0) add
-                    compare = (TestCase) list.get(i);
-                    if (compare.compareTo(newTestCase) >= 0) {
-                        indexToAdd++;
-                    }
-                    // if(newTestCase.getLastTestedDateTime() == null ||
-                    // compare.getLastTestedDateTime() == null)
-                    // {
-                    // indexToAdd = i + 1;
-                    // }
-                    // else if (compare.compareTo(newTestCase) == 1)
-                    // {
-                    // indexToAdd = i + 1;
-                    // }
-                    // else if(compare.compareTo(newTestCase) == 0)
-                    // {
-                    // indexToAdd = i + 1;
-                    // }
-                }
-                list.add(indexToAdd, newTestCase);
-            }
-
-            incNextTestCaseNum();
-            setChanged();
-            notifyObservers(this);
-            return true;
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) 
+        {
             return false;
         }
+        newTestCase.addObserver(this);
+
+		if (list.size() == 0) {
+			list.add(newTestCase);
+		} else {
+			TestCase compare = (TestCase) list.get(0);
+			for (int i = 0; i < list.size(); i++) {
+
+				compare = (TestCase) list.get(i);
+				if (newTestCase.compareTo(compare) < 0) {
+					list.add(i, newTestCase);
+					incNextTestCaseNum();
+					setChanged();
+					notifyObservers(this);
+					return true;
+				}
+			}
+			list.add(list.size(), newTestCase);
+		}
+
+		incNextTestCaseNum();
+		setChanged();
+		notifyObservers(this);
+		return true;
 
     }
 
