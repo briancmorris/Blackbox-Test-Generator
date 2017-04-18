@@ -302,6 +302,7 @@ public class BBTP extends Observable implements Serializable, Observer {
 	public void update(Observable o, Object arg) 
 	{
 		setChanged(true);
+		setChanged();
 		notifyObservers(arg);
 	}
 
