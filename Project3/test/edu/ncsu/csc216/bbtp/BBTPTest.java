@@ -41,6 +41,12 @@ public class BBTPTest {
 		test.removeTestCaseList(0);
 		assertEquals(1, test.getNumTestCaseLists());
 		
+		test.addTestCaseList();
+		test.addTestCaseList();
+		test.addTestCaseList();
+		test.addTestCaseList();
+		assertEquals(5, test.getNumTestCaseLists());
+		
 		
 	}
 	
