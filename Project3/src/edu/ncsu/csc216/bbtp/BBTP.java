@@ -162,6 +162,10 @@ public class BBTP extends Observable implements Serializable, Observer {
 	 */
 	public int addTestCaseList()
 	{
+		if (numLists + 1 == testCases.length) {
+		    growArray();
+		}
+		
 		testCases[numLists] = new TestCaseList( "TCL" + getNextTestCaseListNum(), "New List");
 		testCases[numLists].addObserver(this);
 		setChanged();
@@ -279,6 +283,18 @@ public class BBTP extends Observable implements Serializable, Observer {
             return false;
         }
     }
+    
+    /**
+	 * Increases the storage capacity of the list array when required by the add methods.
+	 */
+    private void growArray() {
+    	TestCaseList[] newList = new TestCaseList[testCases.length * RESIZE];
+        for (int i = 0; i < numLists; i++) {
+            newList[i] = testCases[i];
+        }
+        testCases = newList;
+    }
+    
 
 	@Override
 	public void update(Observable o, Object arg) 
