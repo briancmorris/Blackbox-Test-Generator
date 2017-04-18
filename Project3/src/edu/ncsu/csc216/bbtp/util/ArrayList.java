@@ -33,7 +33,7 @@ public class ArrayList implements List, Serializable {
 	 *        to store objects.
 	 */
 	public ArrayList(int initialSize) {
-	    if (initialSize == 0) {
+	    if (initialSize <= 0) {
 	        throw new IllegalArgumentException();
 	    }
 		this.list = new Object[initialSize];
