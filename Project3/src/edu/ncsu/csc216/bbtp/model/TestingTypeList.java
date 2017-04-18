@@ -174,20 +174,16 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
      *            to remove
      * @return the type removed
      */
-    public TestingType removeTestingTypeAt(int index) 
-    {
-    	try
-    	{
-    		TestingType out = (TestingType) list.remove(index);  
-    		//out.deleteObserver(this);
-    		setChanged();
-    		notifyObservers();
-    		return out;
-    	}	
-    	catch (IndexOutOfBoundsException e) 
-    	{
-    		throw new IndexOutOfBoundsException();
-    	}
+    public TestingType removeTestingTypeAt(int index) {
+        try {
+            TestingType out = (TestingType) list.remove(index);
+            out.deleteObserver(this);
+            setChanged();
+            notifyObservers();
+            return out;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException();
+        }
     }
 
     /**
