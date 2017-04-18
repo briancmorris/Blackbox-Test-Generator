@@ -209,6 +209,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
             compare = (TestCase) list.get(i);
             if (compare.getTestCaseID().equals(testCaseID)) {
                 out = i;
+                break;
             }
         }
         return out;

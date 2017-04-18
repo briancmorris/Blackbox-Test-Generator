@@ -33,7 +33,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
      * constructor for the type list
      */
     public TestingTypeList() {
-        list = new ArrayList();
+        this.list = new ArrayList();
         this.name = "Testing Types";
         this.nextTestingTypeNum = 1;
 
@@ -120,6 +120,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
             compare = (TestingType) list.get(i);
             if (compare.getTestingTypeID().equals(input)) {
                 out = i;
+                break;
             }
         }
         return out;
