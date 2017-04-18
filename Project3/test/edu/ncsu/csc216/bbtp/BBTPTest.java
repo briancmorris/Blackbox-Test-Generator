@@ -45,6 +45,9 @@ public class BBTPTest {
 		test.addTestCaseList();
 		test.addTestCaseList();
 		test.addTestCaseList();
+		
+		test.getTestCaseList(0).setName("TCL1");
+		assertEquals("TCL1", test.getTestCaseList(0).getName());
 		assertEquals(5, test.getNumTestCaseLists());
 		
 		
