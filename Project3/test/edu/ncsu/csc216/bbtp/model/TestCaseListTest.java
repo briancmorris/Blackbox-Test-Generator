@@ -73,6 +73,8 @@ public class TestCaseListTest {
 		assertTrue(test.addTestCase("description", testType, testDate4, "expected", true, testDate5, "actual", false));
 		assertTrue(test.addTestCase("description", testType, testDate5, "expected", false, null, null, false));
 		
+		assertTrue(test.removeTestCase("TCL-TC2"));
+		assertTrue(test.removeTestCase("TCL-TC3"));
 		assertTrue(test.removeTestCase("TCL-TC1"));
 		
 	}

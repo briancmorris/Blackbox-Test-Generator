@@ -259,16 +259,7 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
      * @return true if removed
      */
     public boolean removeTestCase(String testCaseID) {
-        int index = -1;
-        for(int i = 0; i < list.size(); i++)
-        {
-        	TestCase compare = (TestCase) list.get(i);
-        	if(compare.getTestCaseID().equals(testCaseID))
-        	{
-        		index = i;
-        	}
-        }
-        
+        int index = indexOf(testCaseID);
         if (index != -1) {
             TestCase out = removeTestCaseAt(index);
             out.deleteObserver(this);
