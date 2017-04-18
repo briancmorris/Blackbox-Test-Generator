@@ -186,14 +186,15 @@ public class BBTP extends Observable implements Serializable, Observer {
 		if (index < 0 || index >= numLists) {
 	        throw new IndexOutOfBoundsException();
 	    }
-		testCases[index].deleteObserver(this);
+		TestCaseList removed = testCases[index];
+		removed.deleteObserver(this);
 		for (int i = index; i < numLists; i++) {
 			testCases[i] = testCases[i + 1];
 		}
 		numLists--;
 		
 		setChanged(true);
-        notifyObservers(this);
+        notifyObservers(removed);
 	}
 
 	/**
