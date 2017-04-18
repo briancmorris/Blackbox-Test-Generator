@@ -163,7 +163,12 @@ public class ArrayList implements List, Serializable {
 	    }
 		Object element = list[index];
 		for (int i = index; i < size; i++) {
-		    list[i] = list [i + 1];
+		    if (i == size - 1) {
+		        list[i] = null;
+		    } else {
+		        list[i] = list [i + 1];
+		    }
+		    
 		}
 		size--;
 		return element;
