@@ -195,7 +195,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
      * @return true if removed
      */
     public boolean removeTestingType(String id) {
-        int index = indexOfName(id);
+        int index = indexOf(id);
         if (index != -1) {
             TestingType out = removeTestingTypeAt(index);
             out.deleteObserver(this);
@@ -204,6 +204,25 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
             return true;
         }
         return false;
+        
+        
+        
+        /*
+         *  int index = -1;
+        for (int i = 0; i < list.size(); i++)
+        {
+        	TestingType compare = (TestingType) list.get(i);
+        	if (compare.getTestingTypeID().equals(id))
+        	{
+        		TestingType out = removeTestingTypeAt(index);
+        		out.deleteObserver(this);
+        		setChanged();
+        		notifyObservers(this);
+        		return true;
+        	}
+        }
+        return false;
+         */
     }
 
     /**

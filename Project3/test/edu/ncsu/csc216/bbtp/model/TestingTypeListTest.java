@@ -63,7 +63,7 @@ public class TestingTypeListTest {
         assertTrue(testArray[1][2].equals("test2")); 
         
         assertEquals( "TestType2", test.removeTestingTypeAt(1).getName());
-        assertTrue(test.removeTestingType("TestType3"));
+        assertTrue(test.removeTestingType("TT1"));
         
         
         
