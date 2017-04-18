@@ -179,7 +179,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     	try
     	{
     		TestingType out = (TestingType) list.remove(index);  
-    		out.deleteObserver(this);
+    		//out.deleteObserver(this);
     		setChanged();
     		notifyObservers();
     		return out;
