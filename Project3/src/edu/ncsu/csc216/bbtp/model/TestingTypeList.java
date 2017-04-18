@@ -108,17 +108,17 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     /**
      * return the ID of the type provided
      * 
-     * @param input
+     * @param id
      *            the type
      * @return the index
      */
-    public int indexOf(String input) 
+    public int indexOf(String id) 
     {
         int out = -1;
         TestingType compare;
         for (int i = 0; i < list.size(); i++) {
             compare = (TestingType) list.get(i);
-            if (compare.getTestingTypeID().equals(input)) {
+            if (compare.getTestingTypeID().equals(id)) {
                 out = i;
                 break;
             }
@@ -180,7 +180,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
             TestingType out = (TestingType) list.remove(index);
             out.deleteObserver(this);
             setChanged();
-            notifyObservers();
+            notifyObservers(this);
             return out;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException();
@@ -190,17 +190,17 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     /**
      * removes the testing type
      * 
-     * @param input
+     * @param id
      *            Name of type to remove
      * @return true if removed
      */
-    public boolean removeTestingType(String input) {
-        int index = indexOfName(input);
+    public boolean removeTestingType(String id) {
+        int index = indexOfName(id);
         if (index != -1) {
             TestingType out = removeTestingTypeAt(index);
             out.deleteObserver(this);
             setChanged();
-            notifyObservers();
+            notifyObservers(this);
             return true;
         }
         return false;

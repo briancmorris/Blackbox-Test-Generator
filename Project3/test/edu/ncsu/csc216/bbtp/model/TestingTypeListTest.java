@@ -39,8 +39,8 @@ public class TestingTypeListTest {
         try {
             test.getTestingTypeAt(2);
             fail();
-        } catch (Exception e) {
-            // do nothing
+        } catch (IndexOutOfBoundsException e) {
+            assertEquals(1, test.size());
         }
 
         assertEquals("TestType", test.getTestingTypeAt(0).getName());
