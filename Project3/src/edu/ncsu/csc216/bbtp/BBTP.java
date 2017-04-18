@@ -166,14 +166,14 @@ public class BBTP extends Observable implements Serializable, Observer {
 		    growArray();
 		}
 		
-		testCases[numLists] = new TestCaseList( "TCL" + getNextTestCaseListNum(), "New List");
+		testCases[numLists] = new TestCaseList( "New List", "TCL" + getNextTestCaseListNum());
 		testCases[numLists].addObserver(this);
 		setChanged();
         incNextTestCaseListNum();
         numLists++;
         
         setChanged(true);
-        notifyObservers(this);
+        notifyObservers(testCases[numLists]);
 		return numLists - 1;
 	}
 	
