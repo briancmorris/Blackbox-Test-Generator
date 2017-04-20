@@ -38,7 +38,7 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
 	/**
 	 * holds the testing type box object
 	 */
-	private JComboBox<TestingType> toTestingType;
+	private JComboBox<TestingType> tcTestingType;
 	/**
 	 * holds the expected results box object
 	 */
@@ -75,6 +75,11 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
 	 * holds boolean for if its an edit
 	 */
 	private boolean edit;
+	/**
+	 * holds the test case data
+	 */
+	private TestCaseData data;
+	
 	
 	/**
 	 * basic edit panel
