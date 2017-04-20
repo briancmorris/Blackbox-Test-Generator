@@ -2,8 +2,8 @@ package edu.ncsu.csc216.bbtp.ui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.ComponentListener;
-import java.awt.event.ItemListener;
+//import java.awt.event.ComponentListener;
+//import java.awt.event.ItemListener;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.EventListener;
@@ -222,7 +222,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
      * @return the testCreationDate
      */
     Date getTestCreationDate() {
-        return data.getCreationDateTime();
+        return (Date) getTestCreationDateSpinner().getValue();
     }
 
     /**
@@ -231,7 +231,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
      * @return the testCreationDate
      */
     Date getLastTestedDate() {
-        return data.getLastTestedDateTime();
+        return (Date) getLastTestedDateSpinner().getValue();
+        //return data.getLastTestedDateTime();
     }
 
     /**
@@ -273,6 +274,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     JComboBox<TestingType> getTestingType() {
         if (tcTestingType == null) {
             tcTestingType = new JComboBox<TestingType>();
+            tcTestingType.addItem(null);
             for (int i = 0; i < testingTypes.size(); i++) {
                 tcTestingType.addItem(testingTypes.getTestingTypeAt(i));
             }
@@ -352,7 +354,12 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 //        data = new TestCaseData(data.getTestCaseID(), data.getDescription(), data.getTestingType(), date,
 //                data.getLastTestedDateTime(), data.tested(), data.getExpectedResults(), data.getActualResults(),
 //                data.pass());
-        getTestCreationDateSpinner().getModel().setValue(date);
+        if(date == null) {
+            getTestCreationDateSpinner().getModel().setValue(new Date());
+        } else {
+            getTestCreationDateSpinner().getModel().setValue(date);
+        }
+        
     }
 
     /**
@@ -365,7 +372,11 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 //        data = new TestCaseData(data.getTestCaseID(), data.getDescription(), data.getTestingType(),
 //                data.getCreationDateTime(), date, data.tested(), data.getExpectedResults(), data.getActualResults(),
 //                data.pass());
-        getLastTestedDateSpinner().getModel().setValue(date);
+        if(date == null) {
+            getLastTestedDateSpinner().getModel().setValue(new Date());
+        } else {
+            getLastTestedDateSpinner().getModel().setValue(date);
+        }
     }
 
     /**
@@ -491,8 +502,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
         } else {
             testCaseID.setText(data.getTestCaseID());
             tcTestingType.setSelectedItem(data.getTestingType());
-            setCreationDate(getTestCreationDate());
-            setLastTestedDate(getLastTestedDate());
+            setCreationDate(data.getCreationDateTime());
+            setLastTestedDate(data.getLastTestedDateTime());
             testCaseDescription.setText(data.getDescription());
             expectedResults.setText(data.getExpectedResults());
             actualResults.setText(data.getActualResults());
@@ -533,7 +544,16 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
+        if(o instanceof TestingTypeList) {
+            testingTypes = (TestingTypeList) o;
+            tcTestingType = new JComboBox<TestingType>();
+            tcTestingType.addItem(null);
+            for (int i = 0; i < testingTypes.size(); i++) {
+                tcTestingType.addItem(testingTypes.getTestingTypeAt(i));
+            }
+            tcTestingType.setEnabled(false);
+            tcTestingType.setVisible(true);
+        }
     }
 
 }
