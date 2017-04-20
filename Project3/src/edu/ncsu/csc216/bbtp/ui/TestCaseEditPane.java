@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 //import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JSpinner.DateEditor;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
@@ -195,6 +196,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     JSpinner getTestCreationDateSpinner() {
         if (testCreationDate == null) {
             testCreationDate = new JSpinner(new SpinnerDateModel());
+            JSpinner.DateEditor edit = new DateEditor(testCreationDate, "EEE MMM dd yyyy, kk:mm");
+            testCreationDate.setEditor(edit);
             testCreationDate.setEnabled(false);
             testCreationDate.setVisible(true);
         }
@@ -209,6 +212,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     JSpinner getLastTestedDateSpinner() {
         if (testLastTestedDate == null) {
             testLastTestedDate = new JSpinner(new SpinnerDateModel());
+            JSpinner.DateEditor edit = new DateEditor(testLastTestedDate, "EEE MMM dd yyyy, kk:mm");
+            testLastTestedDate.setEditor(edit);
             testLastTestedDate.setEnabled(false);
             testLastTestedDate.setVisible(true);
         }
