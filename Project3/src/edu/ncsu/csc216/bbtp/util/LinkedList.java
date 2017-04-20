@@ -10,9 +10,9 @@ import java.io.Serializable;
  */
 public class LinkedList implements List, Serializable {
 	
-	/** Serial Version UID used to identify an instance of this class when performing IO operations */
+	/** Serial version UID */
 	private static final long serialVersionUID = 349987L;
-	/** The number of Objects in the LinkedList */
+	/** The number of Objects contained in this LinkedList */
 	private int size;
 	/** The front Node of the LinkedList */
 	private Node front;
@@ -220,7 +220,7 @@ public class LinkedList implements List, Serializable {
 	 * @author Nat Ellis
 	 */
 	private class Node implements Serializable {
-		/** Serial Version UID used to identify an instance of this class when performing IO operations */
+		/** Serial Version UID */
 		private static final long serialVersionUID = 484909840L;
 		/** The Object stored within this Node */
 		private Object value;

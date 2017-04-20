@@ -10,11 +10,11 @@ import java.io.Serializable;
  */
 public class ArrayList implements List, Serializable {
 	
-	/** Serial Version UID used to identify an instance of this class when performing IO operations */
+	/** Serial version UID */
 	private static final long serialVersionUID = 28592L;
 	/** Constant value used to resize the list array */
 	private static final int RESIZE = 10;
-	/** The array used to store values in this ArrayList */
+	/** The array used to store Objects in this ArrayList */
 	private Object[] list;
 	/** The number of Objects in the ArrayList */
 	private int size;
@@ -30,7 +30,7 @@ public class ArrayList implements List, Serializable {
 	/**
 	 * The constructor for ArrayList initializes an empty ArrayList with size 0.
 	 * @param initialSize the initial storage capacity of the underlying array used
-	 *        to store objects.
+	 *        to store Objects.
 	 */
 	public ArrayList(int initialSize) {
 	    if (initialSize <= 0) {
