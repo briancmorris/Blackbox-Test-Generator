@@ -546,11 +546,12 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     public void update(Observable o, Object arg) {
         if(o instanceof TestingTypeList) {
             testingTypes = (TestingTypeList) o;
-            tcTestingType = new JComboBox<TestingType>();
+            JComboBox<TestingType> newTypes = new JComboBox<TestingType>();
             tcTestingType.addItem(null);
             for (int i = 0; i < testingTypes.size(); i++) {
-                tcTestingType.addItem(testingTypes.getTestingTypeAt(i));
+                newTypes.addItem(testingTypes.getTestingTypeAt(i));
             }
+            getTestingType().setModel(newTypes.getModel());
             tcTestingType.setEnabled(false);
             tcTestingType.setVisible(true);
         }
