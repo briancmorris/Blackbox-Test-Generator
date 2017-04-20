@@ -2,12 +2,14 @@ package edu.ncsu.csc216.bbtp.ui;
 
 import java.io.Serializable;
 
+import javax.swing.table.AbstractTableModel;
+
 /**
  * GUI for the Model
  * @author Brian Morris
  * @author Nat Ellis
  */
-public class TestCaseTableModel implements Serializable
+public class TestCaseTableModel extends AbstractTableModel implements Serializable
 {
 	/** Serial version UID. */
 	private static final long serialVersionUID = 5954551753060998701L;
@@ -83,7 +85,10 @@ public class TestCaseTableModel implements Serializable
 	 */
 	public TestCaseData getTestCaseRowData(int row)
 	{
-		return null;
+		TestCaseData testCase = new TestCaseData();
+		
+		
+		return testCase;
 	}
 	
 	/**
@@ -93,6 +98,30 @@ public class TestCaseTableModel implements Serializable
 	 */
 	public void setTaskRowData(int row, TestCaseData data)
 	{
+		setValueAt(data.getTestCaseID(), row, 0);
+		setValueAt(data.getDescription(), row, 1);
+		setValueAt(data.getTestingType().getName(), row, 2);
+		setValueAt(data.getCreationDateTime(), row, 3);
+		setValueAt(data.getExpectedResults(), row, 4);
+		if(data.tested())
+		{
+			setValueAt("true", row, 5);
+		}
+		else
+		{
+			setValueAt("false", row, 5);
+		}
+		setValueAt(data.getActualResults(), row, 6);
+		setValueAt(data.pass(), row, 7);
+		if(data.pass())
+		{
+			setValueAt("true", row, 7);
+		}
+		else
+		{
+			setValueAt("false", row, 7);
+		}
+
 		
 	}
 	
