@@ -16,12 +16,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+//import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentListener;
 
 import edu.ncsu.csc216.bbtp.model.TestingType;
@@ -29,82 +30,86 @@ import edu.ncsu.csc216.bbtp.model.TestingTypeList;
 
 /**
  * GUI for the edit panel
+ * 
  * @author Brian Morris
  * @author Nat Ellis
  *
  */
-public class TestCaseEditPane extends JScrollPane implements Serializable, Observer
-{
-	/** Serial version UID. */
-	private static final long serialVersionUID = 5479139338455751629L;
+public class TestCaseEditPane extends JPanel implements Serializable, Observer {
+    /** Serial version UID. */
+    private static final long serialVersionUID = 5479139338455751629L;
 
-	/**
-	 * holds the testing types list
-	 */
-	private TestingTypeList testingTypes;
-	/**
-	 * holds test id box
-	 */
-	private JTextField testCaseID;
-	/**
-	 * holds the testing type box object
-	 */
-	private JComboBox<TestingType> tcTestingType;
-	/**
-	 * holds the expected results box object
-	 */
-	private JTextArea expectedResults;
-	/**
-	 * holds the actual results box object
-	 */
-	private JTextArea actualResults;
-	/**
-	 * holds the description box object
-	 */
-	private JTextArea testCaseDescription;
-	/**
-	 * holds the creation date object
-	 */
-	private JSpinner testCreationDate;
-	/**
-	 * holds the last tested date object
-	 */
-	private JSpinner testLastTestedDate;
-	/**
-	 * holds the tested check box object
-	 */
-	private JCheckBox tested;
-	/**
-	 * holds the pass check box object
-	 */
-	private JCheckBox pass;
-	/**
-	 * holds boolean for if its an addition
-	 */
-	private boolean add;
-	/**
-	 * holds boolean for if its an edit
-	 */
-	private boolean edit;
-	/**
-	 * holds the test case data
-	 */
-	private TestCaseData data;
-	
-	
-	/**
-	 * basic edit panel
-	 * @param list to display
-	 */
+    /**
+     * holds the testing types list
+     */
+    private TestingTypeList testingTypes;
+    /**
+     * holds test id box
+     */
+    private JTextField testCaseID;
+    /**
+     * holds the testing type box object
+     */
+    private JComboBox<TestingType> tcTestingType;
+    /**
+     * holds the expected results box object
+     */
+    private JTextArea expectedResults;
+    /**
+     * holds the actual results box object
+     */
+    private JTextArea actualResults;
+    /**
+     * holds the description box object
+     */
+    private JTextArea testCaseDescription;
+    /**
+     * holds the creation date object
+     */
+    private JSpinner testCreationDate;
+    /**
+     * holds the last tested date object
+     */
+    private JSpinner testLastTestedDate;
+    /**
+     * holds the tested check box object
+     */
+    private JCheckBox tested;
+    /**
+     * holds the pass check box object
+     */
+    private JCheckBox pass;
+    /**
+     * holds boolean for if its an addition
+     */
+    private boolean add;
+    /**
+     * holds boolean for if its an edit
+     */
+    private boolean edit;
+    /**
+     * holds the test case data
+     */
+    private TestCaseData data;
+
+    /**
+     * basic edit panel
+     * 
+     * @param list
+     *            to display
+     */
     public TestCaseEditPane(TestingTypeList list) {
         this(new TestCaseData(), list);
     }
 
-	/**
-	 * constructor for a panel with inputed data
-	 * @param data to add
-	 * @param list to display
-	 */
+    /**
+     * constructor for a panel with inputed data
+     * 
+     * @param data
+     *            to add
+     * @param list
+     *            to display
+     */
     public TestCaseEditPane(TestCaseData data, TestingTypeList list) {
         super();
         this.data = data;
@@ -113,20 +118,20 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
         edit = false;
         init();
     }
-	
-	/**
-	 * Initializes the panel
-	 */
+
+    /**
+     * Initializes the panel
+     */
     private void init() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setBorder(BorderFactory.createLineBorder(Color.black));
         initView();
         fillFields();
     }
-	
-	/**
-	 * Initializes the view
-	 */
+
+    /**
+     * Initializes the view
+     */
     private void initView() {
         // Row 1
         JPanel p = new JPanel(new FlowLayout(FlowLayout.LEADING));
@@ -145,7 +150,7 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
 
         // Row 3
         p = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        p.add(getTestCaseDescription(), SwingConstants.LEFT);
+        p.add(getTestCaseDescription());
         this.add(p);
 
         // Row 4
@@ -163,7 +168,7 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
 
         // Row 6
         p = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        p.add(getExpectedResults(), SwingConstants.LEFT);
+        p.add(getExpectedResults());
         this.add(p);
 
         // Row 7
@@ -173,7 +178,7 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
 
         // Row 8
         p = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        p.add(getActualResults(), SwingConstants.LEFT);
+        p.add(getActualResults());
         this.add(p);
 
         // Row 9
@@ -181,23 +186,25 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
         p.add(new JLabel("Pass?", SwingConstants.LEFT));
         p.add(pass());
         this.add(p);
-	}
-	
-	/**
-	 * return the creation date spinner
-	 * @return the testCreationDate
-	 */
-	JSpinner getTestCreationDateSpinner() {
-		if (testCreationDate == null) {
-		    testCreationDate = new JSpinner(new SpinnerDateModel());
-		    testCreationDate.setEnabled(false);
-		    testCreationDate.setVisible(true);
-		}
-	    return testCreationDate;
-	}
-	
-	/**
+    }
+
+    /**
+     * return the creation date spinner
+     * 
+     * @return the testCreationDate
+     */
+    JSpinner getTestCreationDateSpinner() {
+        if (testCreationDate == null) {
+            testCreationDate = new JSpinner(new SpinnerDateModel());
+            testCreationDate.setEnabled(false);
+            testCreationDate.setVisible(true);
+        }
+        return testCreationDate;
+    }
+
+    /**
      * get last tested date spinner
+     * 
      * @return the testLastTestedDate spinner
      */
     JSpinner getLastTestedDateSpinner() {
@@ -210,24 +217,26 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
     }
 
     /**
-	 * return the creation date
-	 * @return the testCreationDate
-	 */
-	Date getTestCreationDate() {
-		return data.getCreationDateTime();
-	}
+     * return the creation date
+     * 
+     * @return the testCreationDate
+     */
+    Date getTestCreationDate() {
+        return data.getCreationDateTime();
+    }
 
-	/**
-	 * returns the creation date
-	 * @return the testCreationDate
-	 */
-	Date getLastTestedDate() {
-		return data.getLastTestedDateTime();
-	}
-	
+    /**
+     * returns the creation date
+     * 
+     * @return the testCreationDate
+     */
+    Date getLastTestedDate() {
+        return data.getLastTestedDateTime();
+    }
 
-	/**
+    /**
      * returns the case ID
+     * 
      * @return the testCaseID
      */
     JTextField getTestCaseID() {
@@ -242,6 +251,7 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
 
     /**
      * returns the description
+     * 
      * @return the testCaseDescription
      */
     JTextArea getTestCaseDescription() {
@@ -256,42 +266,45 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
     }
 
     /**
-	 * returns the testing types
-	 * @return the testingTypes
-	 */
-	JComboBox<TestingType> getTestingType() {
-		if(tcTestingType == null) {
-		    tcTestingType = new JComboBox<TestingType>();
-		    for (int i = 0; i < testingTypes.size(); i++) {
-		        tcTestingType.addItem(testingTypes.getTestingTypeAt(i));
-		    }
-		    tcTestingType.setEnabled(false);
-		    tcTestingType.setVisible(true);
-		}
-	    return tcTestingType;
-	}
+     * returns the testing types
+     * 
+     * @return the testingTypes
+     */
+    JComboBox<TestingType> getTestingType() {
+        if (tcTestingType == null) {
+            tcTestingType = new JComboBox<TestingType>();
+            for (int i = 0; i < testingTypes.size(); i++) {
+                tcTestingType.addItem(testingTypes.getTestingTypeAt(i));
+            }
+            tcTestingType.setEnabled(false);
+            tcTestingType.setVisible(true);
+        }
+        return tcTestingType;
+    }
 
-	/**
-	 * returns the expected results
-	 * @return the expectedResults
-	 */
-	JTextArea getExpectedResults() {
-	    if (expectedResults == null) {
-	        expectedResults = new JTextArea(5, 80);
-	        expectedResults.setEditable(false);
-	        expectedResults.setVisible(true);
-	        expectedResults.setLineWrap(true);
-	        expectedResults.setAutoscrolls(true);
+    /**
+     * returns the expected results
+     * 
+     * @return the expectedResults
+     */
+    JTextArea getExpectedResults() {
+        if (expectedResults == null) {
+            expectedResults = new JTextArea(5, 80);
+            expectedResults.setEditable(false);
+            expectedResults.setVisible(true);
+            expectedResults.setLineWrap(true);
+            expectedResults.setAutoscrolls(true);
         }
         return expectedResults;
-	}
+    }
 
-	/**
-	 * returns the actual results
-	 * @return the actualResults
-	 */
-	JTextArea getActualResults() {
-	    if (actualResults == null) {
+    /**
+     * returns the actual results
+     * 
+     * @return the actualResults
+     */
+    JTextArea getActualResults() {
+        if (actualResults == null) {
             actualResults = new JTextArea(5, 80);
             actualResults.setEditable(false);
             actualResults.setVisible(true);
@@ -299,156 +312,171 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
             actualResults.setAutoscrolls(true);
         }
         return actualResults;
-	}
+    }
 
-	/**
-	 * returns the value of pass
-	 * @return the pass
-	 */
-	JCheckBox pass() {
-		if(pass == null) {
-		    pass = new JCheckBox();
-		    pass.setEnabled(false);
-		    pass.setVisible(true);
-		}
-	    return pass;
-	}
+    /**
+     * returns the value of pass
+     * 
+     * @return the pass
+     */
+    JCheckBox pass() {
+        if (pass == null) {
+            pass = new JCheckBox();
+            pass.setEnabled(false);
+            pass.setVisible(true);
+        }
+        return pass;
+    }
 
-	/**
-	 * returns true if tested
-	 * @return the tested
-	 */
-	JCheckBox getTested() {
-		if(tested == null) {
-		    tested = new JCheckBox();
-		    tested.setEnabled(false);
-		    tested.setVisible(true);
-		}
-	    return tested;
-	}
+    /**
+     * returns true if tested
+     * 
+     * @return the tested
+     */
+    JCheckBox getTested() {
+        if (tested == null) {
+            tested = new JCheckBox();
+            tested.setEnabled(false);
+            tested.setVisible(true);
+        }
+        return tested;
+    }
 
-	/**
-	 * sets the creation date
-	 * @param date the date to set
-	 */
+    /**
+     * sets the creation date
+     * 
+     * @param date
+     *            the date to set
+     */
     void setCreationDate(Date date) {
-        data = new TestCaseData(data.getTestCaseID(), data.getDescription(), data.getTestingType(),
-                date, data.getLastTestedDateTime(), data.tested(), data.getExpectedResults(),
-                data.getActualResults(), data.pass());
+//        data = new TestCaseData(data.getTestCaseID(), data.getDescription(), data.getTestingType(), date,
+//                data.getLastTestedDateTime(), data.tested(), data.getExpectedResults(), data.getActualResults(),
+//                data.pass());
+        getTestCreationDateSpinner().getModel().setValue(date);
     }
 
-	/**
-	 * sets the tested date
-	 * @param date the date to set
-	 */
+    /**
+     * sets the tested date
+     * 
+     * @param date
+     *            the date to set
+     */
     void setLastTestedDate(Date date) {
-        data = new TestCaseData(data.getTestCaseID(), data.getDescription(), data.getTestingType(),
-                data.getCreationDateTime(), date, data.tested(), data.getExpectedResults(),
-                data.getActualResults(), data.pass());
+//        data = new TestCaseData(data.getTestCaseID(), data.getDescription(), data.getTestingType(),
+//                data.getCreationDateTime(), date, data.tested(), data.getExpectedResults(), data.getActualResults(),
+//                data.pass());
+        getLastTestedDateSpinner().getModel().setValue(date);
     }
 
-	/**
-	 * retursn true if added
-	 * @return the add
-	 */
-	boolean isAddMode() {
-		return add;
-	}
+    /**
+     * retursn true if added
+     * 
+     * @return the add
+     */
+    boolean isAddMode() {
+        return add;
+    }
 
-	/**
-	 * returns true if edited
-	 * @return the edit
-	 */
-	boolean isEditMode() {
-		return edit;
-	}
-	
-	/**
-	 * enables add mode
-	 */
-	void enableAdd() {
-	    if (!add) {
+    /**
+     * returns true if edited
+     * 
+     * @return the edit
+     */
+    boolean isEditMode() {
+        return edit;
+    }
+
+    /**
+     * enables add mode
+     */
+    void enableAdd() {
+        if (!add) {
             add = true;
             edit = false;
             clearFields();
         }
-	}
-	
-	/**
-	 * disables add mode
-	 */
-	void disableAdd() {
-	    add = false;
-	    clearFields();
-	}
-	
-	/**
-	 * enables edit mode
-	 * @param data to edit
-	 */
-	void enableEdit(TestCaseData data) {
-	    if (!edit) {
-	        edit = true;
-	        add = false;
+    }
+
+    /**
+     * disables add mode
+     */
+    void disableAdd() {
+        add = false;
+        clearFields();
+    }
+
+    /**
+     * enables edit mode
+     * 
+     * @param data
+     *            to edit
+     */
+    void enableEdit(TestCaseData data) {
+        if (!edit) {
+            edit = true;
+            add = false;
             clearFields();
         }
-	}
-	
-	/**
-	 * disables edit mode
-	 */
-	void disableEdit() {
-	    edit = false;
-	    clearFields();
-	}
-	
-	/**
-	 * returns true if the field is not empty
-	 * @return true if the field is not empty
-	 */
+    }
+
+    /**
+     * disables edit mode
+     */
+    void disableEdit() {
+        edit = false;
+        clearFields();
+    }
+
+    /**
+     * returns true if the field is not empty
+     * 
+     * @return true if the field is not empty
+     */
     boolean fieldsNotEmpty() {
         return tcTestingType.getSelectedItem() != null && testLastTestedDate.getValue() != null
                 && testCreationDate.getValue() != null && !tested.isSelected() && !pass.isSelected()
-                && expectedResults.getDocument().getLength() != 0
-                && actualResults.getDocument().getLength() != 0
+                && expectedResults.getDocument().getLength() != 0 && actualResults.getDocument().getLength() != 0
                 && testCaseDescription.getDocument().getLength() != 0;
     }
-	
-	/**
-	 * sets the test case data
-	 * @param data to set
-	 */
+
+    /**
+     * sets the test case data
+     * 
+     * @param data
+     *            to set
+     */
     void setTestCaseData(TestCaseData data) {
         this.data = data;
     }
-	
-	/**
-	 * adds a listener
-	 * @param listener to add
-	 */
+
+    /**
+     * adds a listener
+     * 
+     * @param listener
+     *            to add
+     */
     void addFieldListener(EventListener listener) {
-        getTestCreationDateSpinner().addComponentListener((ComponentListener) listener);
-        getLastTestedDateSpinner().addComponentListener((ComponentListener) listener);
-        getTestingType().addItemListener((ItemListener) listener);
+        getTestCreationDateSpinner().addChangeListener((ChangeListener) listener);
+        getLastTestedDateSpinner().addChangeListener((ChangeListener) listener);
+        //getTestingType().addItemListener((ItemListener) listener);
         getTestCaseDescription().getDocument().addDocumentListener((DocumentListener) listener);
         getExpectedResults().getDocument().addDocumentListener((DocumentListener) listener);
         getActualResults().getDocument().addDocumentListener((DocumentListener) listener);
-        getTested().addItemListener((ItemListener) listener);
-        pass().addItemListener((ItemListener) listener);
+        //getTested().addItemListener((ItemListener) listener);
+        //pass().addItemListener((ItemListener) listener);
     }
-	
-	/**
-	 * fills the field
-	 */
-	void fillFields()
-	{
-	    if (data == null) {
+
+    /**
+     * fills the field
+     */
+    void fillFields() {
+        if (data == null) {
             testCaseID.setText("");
             tcTestingType.setSelectedItem(null);
             tcTestingType.setEnabled(false);
-            testCreationDate.setValue(null);
+            setCreationDate(new Date());
             testCreationDate.setEnabled(false);
-            testLastTestedDate.setValue(null);
+            setLastTestedDate(new Date());
             testLastTestedDate.setEnabled(false);
             testCaseDescription.setText("");
             testCaseDescription.setEditable(false);
@@ -463,8 +491,8 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
         } else {
             testCaseID.setText(data.getTestCaseID());
             tcTestingType.setSelectedItem(data.getTestingType());
-            testCreationDate.setValue(data.getCreationDateTime());
-            testLastTestedDate.setValue(data.getLastTestedDateTime());
+            setCreationDate(getTestCreationDate());
+            setLastTestedDate(getLastTestedDate());
             testCaseDescription.setText(data.getDescription());
             expectedResults.setText(data.getExpectedResults());
             actualResults.setText(data.getActualResults());
@@ -481,31 +509,31 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
             tested.setEnabled(true);
             pass.setEnabled(true);
         }
-	}
-	
-	/**
-	 * clears the field
-	 */
-	void clearFields()
-	{
-		data = null;
-		fillFields();
-	}
-	
-	/**
-	 * returns the field data
-	 * @return the field data
-	 */
+    }
+
+    /**
+     * clears the field
+     */
+    void clearFields() {
+        data = null;
+        fillFields();
+    }
+
+    /**
+     * returns the field data
+     * 
+     * @return the field data
+     */
     TestCaseData getFields() {
         return new TestCaseData(getTestCaseID().getText(), getTestCaseDescription().getText(),
-                (TestingType) getTestingType().getSelectedItem(), getTestCreationDate(),
-                getLastTestedDate(), getTested().isSelected(), getExpectedResults().getText(),
-                getActualResults().getText(), pass().isSelected());
+                (TestingType) getTestingType().getSelectedItem(), getTestCreationDate(), getLastTestedDate(),
+                getTested().isSelected(), getExpectedResults().getText(), getActualResults().getText(),
+                pass().isSelected());
     }
-	
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-	}
-	
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // TODO Auto-generated method stub
+    }
+
 }
