@@ -203,16 +203,14 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
      * @return the index of the test case that matches the string
      */
     public int indexOf(String testCaseID) {
-        int out = -1;
-        TestCase compare;
         for (int i = 0; i < list.size(); i++) {
-            compare = (TestCase) list.get(i);
+            TestCase compare = (TestCase) list.get(i);
             if (compare.getTestCaseID().equals(testCaseID)) {
-                out = i;
-                break;
+                return i;
+                //break;
             }
         }
-        return out;
+        return -1;
     }
 
     /**

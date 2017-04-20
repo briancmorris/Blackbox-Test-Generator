@@ -2,8 +2,6 @@ package edu.ncsu.csc216.bbtp.ui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
-//import java.awt.event.ComponentListener;
-//import java.awt.event.ItemListener;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.EventListener;
@@ -444,10 +442,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
      * @return true if the field is not empty
      */
     boolean fieldsNotEmpty() {
-        return tcTestingType.getSelectedItem() != null && testLastTestedDate.getValue() != null
-                && testCreationDate.getValue() != null && !tested.isSelected() && !pass.isSelected()
-                && expectedResults.getDocument().getLength() != 0 && actualResults.getDocument().getLength() != 0
-                && testCaseDescription.getDocument().getLength() != 0;
+        return tcTestingType.getSelectedItem() != null && testCreationDate.getValue() != null
+                && expectedResults.getDocument().getLength() != 0 && testCaseDescription.getDocument().getLength() != 0;
     }
 
     /**
