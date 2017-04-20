@@ -105,6 +105,7 @@ public class TestCaseEditPane extends JScrollPane implements Serializable, Obser
     public TestCaseEditPane(TestCaseData data, TestingTypeList list) {
         super();
         this.data = data;
+        this.testingTypes = list;
         add = false;
         edit = false;
         init();
