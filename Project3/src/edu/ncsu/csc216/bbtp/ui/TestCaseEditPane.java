@@ -424,7 +424,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
         if (!edit) {
             edit = true;
             add = false;
-            clearFields();
+            this.data = data;
+            fillFields();
         }
     }
 
