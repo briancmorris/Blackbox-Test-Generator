@@ -196,8 +196,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     JSpinner getTestCreationDateSpinner() {
         if (testCreationDate == null) {
             testCreationDate = new JSpinner(new SpinnerDateModel());
-            JSpinner.DateEditor edit = new DateEditor(testCreationDate, "EEE MMM dd yyyy, kk:mm");
-            testCreationDate.setEditor(edit);
+            JSpinner.DateEditor editor = new DateEditor(testCreationDate, "EEE MMM dd yyyy, kk:mm");
+            testCreationDate.setEditor(editor);
             testCreationDate.setEnabled(false);
             testCreationDate.setVisible(true);
         }
@@ -212,8 +212,8 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     JSpinner getLastTestedDateSpinner() {
         if (testLastTestedDate == null) {
             testLastTestedDate = new JSpinner(new SpinnerDateModel());
-            JSpinner.DateEditor edit = new DateEditor(testLastTestedDate, "EEE MMM dd yyyy, kk:mm");
-            testLastTestedDate.setEditor(edit);
+            JSpinner.DateEditor editor = new DateEditor(testLastTestedDate, "EEE MMM dd yyyy, kk:mm");
+            testLastTestedDate.setEditor(editor);
             testLastTestedDate.setEnabled(false);
             testLastTestedDate.setVisible(true);
         }
