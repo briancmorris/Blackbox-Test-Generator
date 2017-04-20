@@ -112,6 +112,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
         super();
         this.data = data;
         this.testingTypes = list;
+        testingTypes.addObserver(this);
         add = false;
         edit = false;
         init();
