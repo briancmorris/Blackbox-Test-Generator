@@ -19,7 +19,7 @@ import edu.ncsu.csc216.bbtp.model.TestCaseList;
  */
 public class TestCaseListPane extends JScrollPane implements Serializable, Observer {
 	
-	/** Serial version UID. */
+	/** Serial version UID */
 	private static final long serialVersionUID = -2210716111020406799L;
 	/** List of TestCases to display */
 	private TestCaseList testCaseList;
