@@ -173,11 +173,12 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     }
 
     /**
-     * removes the testing type
+     * Removes the TestingType with the given ID and returns true if removed
+     * successfully. If the ID cannot be found, false is returned.
      * 
-     * @param id
-     *            Name of type to remove
-     * @return true if removed
+     * @param id the ID of the TestingType to remove.
+     * @return true if the TestingType is removed successfully, false if the
+     *         TestingType does not exist in the list.
      */
     public boolean removeTestingType(String id) {
         int index = indexOf(id);
@@ -192,21 +193,27 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     }
 
     /**
-     * returns the next testing type number
-     * 
-     * @return
+     * Returns the value of nextTestingTypeNum.
+     * @return the value of nextTestingTypeNum
      */
     private int getNextTestingTypeNum() {
         return nextTestingTypeNum;
     }
 
     /**
-     * increases the next testing type number
+     * Increments the value of nextTestingTypeNum.
      */
     private void incNextTestingTypeNum() {
         nextTestingTypeNum++;
     }
 
+    /**
+     * The update method notifies the observers of TestingTypeList
+     * when any changes have occurred to a TestingType Object that is contained
+     * within this TesingTypeList.
+     * @param o the observable object that TestingTypeList observes
+     * @param arg the Object that is used to update the observers of TestingTypeList
+     */
     @Override
     public void update(Observable o, Object arg) {
         // TODO Auto-generated method stub
@@ -217,6 +224,13 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
         }
     }
 
+    /**
+     * Returns a 2D Object array containing the ID, name, and description of all
+     * TestingType Objects contained within this TestingTypeList.
+     * 
+     * @return a 2D Object array containing the ID, name, and description of all
+     *         TestingType Objects contained within this TestingTypeList.
+     */
     @Override
     public Object[][] get2DArray() {
         Object[][] out = new Object[list.size()][3];

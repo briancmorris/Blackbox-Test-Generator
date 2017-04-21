@@ -5,77 +5,57 @@ import java.util.Date;
 import java.util.Observable;
 
 /**
- * A basic java object for test cases
+ * The TestCase class stores and maintains information about a test case found
+ * in a black box test plan. This includes: its ID, its creation date, its
+ * description, its expected results, its actual results, its last testing date,
+ * test completion status, and passing status.
  * 
- * @author Brian and Nat
+ * @author Brian Morris
+ * @author Nat Ellis
  *
  */
 public class TestCase extends Observable implements Serializable {
 
-    /** Serial version UID. */
+    /** Serial version UID */
     private static final long serialVersionUID = 7459L;
 
-    /**
-     * holds the test id
-     */
+    /** The ID of this TestCase */
     private String testCaseID;
-    /**
-     * holds the creation date
-     */
+    /** The creation date of this TestCase */
     private Date creationDate;
-    /**
-     * holds the description
-     */
+    /** The description of this TestCase */
     private String description;
-    /**
-     * holds the expected results
-     */
+    /** The expected results of this TestCase */
     private String expectedResult;
-    /**
-     * holds the actual results
-     */
+    /** The actual results of this TestCase */
     private String actualResults;
-    /**
-     * holds the last test date
-     */
+    /** The last testing date of this TestCase */
     private Date lastTestedDate;
-    /**
-     * holds boolean for if it has been tested
-     */
+    /** Boolean that is true if this TestCase has been tested */
     private boolean testedStatus;
-    /**
-     * holds boolean for if it is passing
-     */
+    /** Boolean that is true if this TestCase has passed testing */
     private boolean pass;
-    /**
-     * holds the test type
-     */
+    /** The TestingType of this TestCase */
     private TestingType type;
 
     /**
-     * constructor for Test case
-     * 
-     * @param id
-     *            the id of the test
-     * @param desc
-     *            description of the test
-     * @param type
-     *            type of the test
-     * @param creation
-     *            date test was made
-     * @param exp
-     *            expected results
-     * @param tested
-     *            true if it has been tested
-     * @param lastTestDate
-     *            last tested date
-     * @param act
-     *            actual results
-     * @param pass
-     *            true if it passed
+     * The constructor for TestCase creates a TestCase Object with the provided parameters and
+     * notifies the observers of this TestCase. If any of these parameters are null, an empty String,
+     * or invalid as determined by the setter methods, an IllegalArgumentException is thrown.
+     * @param id the ID of this TestCase
+     * @param desc the description of this TestCase
+     * @param type the TestingType of this TestCase
+     * @param creation the creation date of this TestCase
+     * @param exp the expected results of this TestCase
+     * @param tested the boolean that represents whether or not this TestCase has been tested
+     * @param lastTestDate the last testing date of this TestCase
+     * @param act the actual results of this TestCase
+     * @param pass the boolean that represents whether or not this TestCase has passed testing
+     * @throws IllegalArgumentException if the provided parameters are null, an empty String,
+     *         or invalid as determined by the setter methods
      */
-    public TestCase(String id, String desc, TestingType type, Date creation, String exp, boolean tested,
-            Date lastTestDate, String act, boolean pass) {
+    public TestCase(String id, String desc, TestingType type, Date creation, String exp,
+                    boolean tested, Date lastTestDate, String act, boolean pass) {
         setTestCaseID(id);
         setDescription(desc);
         setTestingType(type);
@@ -91,19 +71,21 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns the creation date
+     * Returns the creation date of this TestCase.
      * 
-     * @return the creationDate
+     * @return the creation date of this TestCase
      */
     public Date getCreationDateTime() {
         return creationDate;
     }
 
     /**
-     * sets the creation date
+     * Changes the creation date of this TestCase to the provided
+     * date and notifies the observers of this TestCase. If the provided
+     * creation date is null, an IllegalArgumentException is thrown.
      * 
-     * @param creationDate
-     *            the creationDate to set
+     * @param creationDate the new creation date of this TestCase
+     * @throws IllegalArgumentException if the provided creation date is null
      */
     public void setCreationDateTime(Date creationDate) {
         if (creationDate == null) {
@@ -117,19 +99,23 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns the description
+     * Returns the description of this TestCase.
      * 
-     * @return the description
+     * @return the description of this TestCase
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * sets the description
+     * Changes the description of this TestCase to the description provided and
+     * notifies the observers of this TestCase. If the given description is
+     * null, contains all whitespace, or empty, an IllegalArgumentException
+     * is thrown.
      * 
-     * @param description
-     *            the description to set
+     * @param description the new description of this TestCase
+     * @throws IllegalArgumentException if the given description is null, contains
+     *         all whitespace, or empty
      */
     public void setDescription(String description) {
         if (description == null || description.trim().isEmpty()) {
@@ -143,19 +129,23 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns the expected results
+     * Returns the expected results of this TestCase.
      * 
-     * @return the expectedResult
+     * @return the expected results of this TestCase
      */
     public String getExpectedResults() {
         return expectedResult;
     }
 
     /**
-     * sets the expected results
+     * Changes the expected results of this TestCase to the provided expected
+     * results and notifies the observers of this TestCase. If the provided
+     * expected results are null, all whitespace, or an empty String, an
+     * IllegalArgumentException is thrown.
      * 
-     * @param expectedResult
-     *            the expectedResult to set
+     * @param expectedResult the new expected results of this TestCase
+     * @throws IllegalArgumentException if the provided expected results are null, all whitespace,
+     *         or an empty String
      */
     public void setExpectedResults(String expectedResult) {
         if (expectedResult == null || expectedResult.trim().isEmpty()) {
@@ -169,19 +159,23 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns the actual results
+     * Returns the actual results of this TestCase.
      * 
-     * @return the actualResults
+     * @return the actual results of this TestCase
      */
     public String getActualResults() {
         return actualResults;
     }
 
     /**
-     * sets the actual results
+     * Changes the actual results of this TestCase to the provided actual
+     * results and notifies the observers of this TestCase. If the provided
+     * actual results are null, all whitespace, or an empty String, an
+     * IllegalArgumentException is thrown.
      * 
-     * @param actualResults
-     *            the actualResults to set
+     * @param actualResults the new actual results of this TestCase
+     * @throws IllegalArgumentException if the provided actual results are null, all whitespace,
+     *         or an empty String
      */
     public void setActualResults(String actualResults) {
         if (testedStatus && (actualResults == null || actualResults.trim().isEmpty())) {
@@ -195,19 +189,22 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns the last tested date
+     * Returns the date that this TestCase was last tested.
      * 
-     * @return the lastTestedDate
+     * @return the date that this TestCase was last tested.
      */
     public Date getLastTestedDateTime() {
         return lastTestedDate;
     }
 
     /**
-     * sets the last tested date
+     * Changes the last testing date of this TestCase to the date provided and notifies
+     * the observers of this TestCase. If this provided date is null and this TestCase
+     * has not been marked as tested, an IllegalArgumentException is thrown.
      * 
-     * @param lastTestedDate
-     *            the lastTestedDate to set
+     * @param lastTestedDate the updated last testing date of this TestCase
+     * @throws IllegalArgumentException if the provided date is null and
+     *         this TestCase has not been marked as tested
      */
     public void setLastTestedDateTime(Date lastTestedDate) {
         if (lastTestedDate == null && testedStatus) {
@@ -221,19 +218,19 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns true if it is passing
+     * Returns true if this TestCase has passed testing, false if not.
      * 
-     * @return the pass
+     * @return true if this TestCase has passed testing, false if not
      */
     public boolean pass() {
         return pass;
     }
 
     /**
-     * sets true if it is passing
+     * Changes the pass field to the boolean provided and notifies the
+     * observers of this TestCase.
      * 
-     * @param pass
-     *            the pass to set
+     * @param pass the updated passing status of this TestCase
      */
     public void setPass(boolean pass) {
         this.pass = pass;
@@ -243,19 +240,21 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns the type
+     * Returns the TestingType of this TestCase.
      * 
-     * @return the type
+     * @return the TestingType of this TestCase
      */
     public TestingType getTestingType() {
         return type;
     }
 
     /**
-     * sets the type
+     * Changes the TestingType of this TestCase to the TestingType provided and notifies
+     * the observers of this TestCase. If the TestingType that is provided is null,
+     * an IllegalArgumentException is thrown.
      * 
-     * @param type
-     *            the type to set
+     * @param type the new TestingType of this TestCase
+     * @throws IllegalArgumentException if the provided TestingType is null
      */
     public void setTestingType(TestingType type) {
         if (type == null) {
@@ -269,19 +268,19 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns the tested status
+     * Returns true if this TestCase has been tested, false if not.
      * 
-     * @return the testedStatus
+     * @return true if this TestCase has been tested, false if not
      */
     public boolean tested() {
         return testedStatus;
     }
 
     /**
-     * sets the tested status
+     * Changes the testedStatus field to the boolean provided and notifies the
+     * observers of this TestCase.
      * 
-     * @param testedStatus
-     *            the testedStatus to set
+     * @param testedStatus the updated testing status of this TestCase
      */
     public void setTestedStatus(boolean testedStatus) {
         this.testedStatus = testedStatus;
@@ -291,19 +290,22 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * returns the test case id
+     * Returns the ID of this TestCase.
      * 
-     * @return the testCaseID
+     * @return the ID of this TestCase
      */
     public String getTestCaseID() {
         return testCaseID;
     }
 
     /**
-     * sets the test case id
+     * Changes the ID of this TestCase to the provided ID and notifies
+     * the observers of this TestCase. If the provided ID is null or an
+     * empty String, an IllegalArgumentException is thrown.
      * 
-     * @param testCaseID
-     *            the testCaseID to set
+     * @param testCaseID the new ID of this TestCase
+     * @throws IllegalArgumentException if the provided ID is null or an empty
+     *         String
      */
     private void setTestCaseID(String testCaseID) {
         if (testCaseID == null || testCaseID.isEmpty()) {
@@ -315,10 +317,9 @@ public class TestCase extends Observable implements Serializable {
         notifyObservers(this);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
+    /**
+     * Generates and returns the hash code for this TestCase.
+     * @return the hash code for this TestCase
      */
     @Override
     public int hashCode() {
@@ -336,10 +337,9 @@ public class TestCase extends Observable implements Serializable {
         return result;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
+    /**
+     * Returns true if the provided Object is equal to this TestCase.
+     * @return true if the provided Object is equal to this TestCase
      */
     @Override
     public boolean equals(Object obj) {
@@ -360,11 +360,17 @@ public class TestCase extends Observable implements Serializable {
     }
 
     /**
-     * compares this test case to input
+     * Compares the last testing date of this TestCase to that of the given TestCase.
+     * Returns a negative value if the testing data of the provided TestCase is less
+     * than the testing date of this TestCase, a positive value if it is greater than
+     * the testing date of this TestCase, or 0 if the testing dates are both equal. If the
+     * provided TestCase is null, a NullPointerException is thrown.
      * 
-     * @param input
-     *            to compare this with
-     * @return 0 if equal
+     * @param input the TestCase to compare with this TestCase
+     * @return 0 if the testing dates of both TestCases are equal, a negative value if
+     *         the provided TestCase has a testing date smaller than the testing date of this
+     *         TestCase, or a positive value if the provided TestCase has
+     *         a testing date greater than the testing date of this TestCase
      */
     public int compareTo(TestCase input) {
         if (input == null) {

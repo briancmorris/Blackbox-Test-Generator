@@ -4,37 +4,32 @@ import java.io.Serializable;
 import java.util.Observable;
 
 /**
- * A basic java object for testing types
+ * The TestingType class maintains information relevant to a TestingType
+ * including its name, description, and ID.
  * 
- * @author Brian and Nat
- *
+ * @author Brian Morris
+ * @author Nat Ellis
  */
 public class TestingType extends Observable implements Serializable {
 
-    /** Serial version UID. */
+    /** Serial version UID */
     private static final long serialVersionUID = 459188L;
-    /**
-     * holds the name
-     */
+    /** The name of the TestingType */
     private String name;
-    /**
-     * holds the description
-     */
+    /** The description of the testing type */
     private String description;
-    /**
-     * holds the testing type
-     */
+    /** The ID of the testing type */
     private String testingTypeId;
 
     /**
-     * constructs a testing type
+     * Constructs a TestingType with the given ID, name, and description and notifies
+     * any of the observers of this TestingType. If any of these parameters are null or
+     * an empty String, an IllegalArgumentException is thrown.
      * 
-     * @param name
-     *            of the type
-     * @param description
-     *            of the type
-     * @param id
-     *            of the type
+     * @param name the name of the TestingType
+     * @param description the description of the TestingType
+     * @param id the ID of the TestingType
+     * @throws IllegalArgumentException if any of the provided parameters are null or empty
      */
     public TestingType( String id, String name, String description) {
         setName(name);
@@ -46,19 +41,19 @@ public class TestingType extends Observable implements Serializable {
     }
 
     /**
-      * returns the name
-     * 
-     * @return the name
+     * Returns the name of this TestingType.
+     * @return the name of this TestingType
      */
     public String getName() {
         return name;
     }
 
     /**
-     * sets the name
-     * 
-     * @param name
-     *            the name to set
+     * Changes the name of this TestingType to the provided name and notifies the observers
+     * of this TestingType. If the given name is null or an empty string, an IllegalArgumentException
+     * is thrown.
+     * @param name the new name of this TestingType
+     * @throws IllegalArgumentException if name is null or an empty String
      */
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
@@ -74,19 +69,19 @@ public class TestingType extends Observable implements Serializable {
     }
 
     /**
-     * returns the description
-     * 
-     * @return the description
+     * Returns the description of this TestingType.
+     * @return the description of this TestingType
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * sets the description
-     * 
-     * @param description
-     *            the description to set
+     * Changes the description of this TestingType to the description provided
+     * and notifies the observers of this TestingType. If the provided description is
+     * null or an empty String, an IlegalArgumentException is thrown.
+     * @param description the new description of this TestingType
+     * @throws IllegalArgumentException if description is null or an empty String
      */
     public void setDescription(String description) {
         if(description == null || description.isEmpty()) {
@@ -99,19 +94,19 @@ public class TestingType extends Observable implements Serializable {
     }
 
     /**
-     * returns the testing type
-     * 
-     * @return the testingTypeId
+     * Returns the ID of this TestingType.
+     * @return the ID of this TestingType
      */
     public String getTestingTypeID() {
         return testingTypeId;
     }
 
     /**
-     * sets the testing type id
-     * 
-     * @param testingTypeId
-     *            the testingTypeId to set
+     * Changes the ID of this TestingType to the ID provided
+     * and notifies the observers of this TestingType. If the provided
+     * ID is null or an empty String, an IllegalArgumentException is thrown.
+     * @param testingTypeId the new ID of this TestingType
+     * @throws IllegalArgumentException if testingTypeId is null or an empty String
      */
     private void setTestingTypeId(String testingTypeId) {
         if (testingTypeId == null || testingTypeId.isEmpty()) {
@@ -124,10 +119,9 @@ public class TestingType extends Observable implements Serializable {
         notifyObservers(this);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
+    /**
+     * Generates and returns the hash code for this TestingType.
+     * @return the hash code for this TestingType
      */
     @Override
     public int hashCode() {
@@ -139,10 +133,10 @@ public class TestingType extends Observable implements Serializable {
         return result;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
+
+    /**
+     * Returns true if the provided Object is equal to this TestingType.
+     * @return true if the provided Object is equal to this TestingType
      */
     @Override
     public boolean equals(Object obj) {
@@ -161,10 +155,9 @@ public class TestingType extends Observable implements Serializable {
         return false;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#toString()
+    /**
+     * Returns the String representation of this TestingType.
+     * @return the String representation of this TestingType
      */
     @Override
     public String toString() {
@@ -172,11 +165,17 @@ public class TestingType extends Observable implements Serializable {
     }
 
     /**
-     * compares this test type to input
+     * Compares the ID of this TestingType to that of the given TestingType.
+     * Returns a negative value if the ID of the provided TestingType is less
+     * than the ID of this TestingType, a positive value if it is greater than
+     * the ID of this TestingType, or 0 if the ID's are both equal. If the
+     * provided TestingType is null, a NullPointerException is thrown.
      * 
-     * @param input
-     *            to compare this with
-     * @return 0 if equal
+     * @param input the TestingType to compare with this TestingType
+     * @return 0 if the ID's of both TestingTypes are equal, a negative value if
+     *         the provided TestingType has an ID smaller than the ID of this
+     *         TestingType, or a positive value if the provided TestingType has
+     *         an ID greater than the ID of this TestingType
      */
     public int compareTo(TestingType input) {
         if (input == null) {
