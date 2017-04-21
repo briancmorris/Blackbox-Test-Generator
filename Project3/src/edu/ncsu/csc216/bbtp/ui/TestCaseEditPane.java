@@ -28,86 +28,56 @@ import edu.ncsu.csc216.bbtp.model.TestingType;
 import edu.ncsu.csc216.bbtp.model.TestingTypeList;
 
 /**
- * GUI for the edit panel
+ * GUI panel for editing a TestCase.
  * 
  * @author Brian Morris
  * @author Nat Ellis
  *
  */
 public class TestCaseEditPane extends JPanel implements Serializable, Observer {
-    /** Serial version UID. */
+    /** Serial version UID */
     private static final long serialVersionUID = 5479139338455751629L;
 
-    /**
-     * holds the testing types list
-     */
+    /** The TestingTypeList used to create a TestCase */
     private TestingTypeList testingTypes;
-    /**
-     * holds test id box
-     */
+    /** Text field for the TestCase ID */
     private JTextField testCaseID;
-    /**
-     * holds the testing type box object
-     */
+    /** Drop down menu for TestingTypes */
     private JComboBox<TestingType> tcTestingType;
-    /**
-     * holds the expected results box object
-     */
+    /** Text area for expected results of the TestCase */
     private JTextArea expectedResults;
-    /**
-     * holds the actual results box object
-     */
+    /** Text area for the actual results of the TestCase */
     private JTextArea actualResults;
-    /**
-     * holds the description box object
-     */
+    /** Text area for the TestCase description */
     private JTextArea testCaseDescription;
-    /**
-     * holds the creation date object
-     */
+    /** JSpinner that maintains the creation date */
     private JSpinner testCreationDate;
-    /**
-     * holds the last tested date object
-     */
+    /** JSpinner that maintains the last testing date */
     private JSpinner testLastTestedDate;
-    /**
-     * holds the tested check box object
-     */
+    /** Check box used to indicate if a TestCase has been tested */
     private JCheckBox tested;
-    /**
-     * holds the pass check box object
-     */
+    /** Check box used to indicate if a TestCase has passed testing */
     private JCheckBox pass;
-    /**
-     * holds boolean for if its an addition
-     */
+    /** Boolean that represents whether or not TestCaseEditPane is in add mode */
     private boolean add;
-    /**
-     * holds boolean for if its an edit
-     */
+    /** Boolean that represents whether or not TestCaseEditPane is in edit mode */
     private boolean edit;
-    /**
-     * holds the test case data
-     */
+    /** Represents the current TestCase being edited */
     private TestCaseData data;
 
     /**
-     * basic edit panel
-     * 
-     * @param list
-     *            to display
+     * Creates a new edit pane with an empty TestingTypeData.
+     * @param list the list of TestingTypes used when creating a TestCase
      */
     public TestCaseEditPane(TestingTypeList list) {
         this(new TestCaseData(), list);
     }
 
     /**
-     * constructor for a panel with inputed data
+     * Creates a new edit pane with the given TestCaseData.
      * 
-     * @param data
-     *            to add
-     * @param list
-     *            to display
+     * @param data information to populate the pane with
+     * @param list the list of TestingTypes used when creating a TestCase
      */
     public TestCaseEditPane(TestCaseData data, TestingTypeList list) {
         super();
@@ -120,7 +90,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * Initializes the panel
+     * Initializes the GUI.
      */
     private void init() {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -130,7 +100,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * Initializes the view
+     * Initializes the view.
      */
     private void initView() {
         // Row 1
@@ -189,9 +159,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * return the creation date spinner
+     * Returns the JSpinner used to control the creation date of a TestCase.
      * 
-     * @return the testCreationDate
+     * @return the JSpinner used to control the creation date of a TestCase.
      */
     JSpinner getTestCreationDateSpinner() {
         if (testCreationDate == null) {
@@ -205,9 +175,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * get last tested date spinner
+     * Returns the JSpinner used to control the creation date of a TestCase.
      * 
-     * @return the testLastTestedDate spinner
+     * @return the JSpinner used to control the creation date of a TestCase
      */
     JSpinner getLastTestedDateSpinner() {
         if (testLastTestedDate == null) {
@@ -221,28 +191,31 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * return the creation date
+     * Returns the creation date of the TestCase as determined by the value on
+     * the testCreationDate JSpinner.
      * 
-     * @return the testCreationDate
+     * @return the creation date of the TestCase as determined by the value on
+     *         the testCreationDate JSpinner
      */
     Date getTestCreationDate() {
         return (Date) getTestCreationDateSpinner().getValue();
     }
 
     /**
-     * returns the creation date
+     * Returns the last testing date of the TestCase as determined by the value
+     * on the testLastTestedDate JSpinner.
      * 
-     * @return the testCreationDate
+     * @return the last testing date of the TestCase as determined by the value
+     *         on the testLastTestedDate JSpinner
      */
     Date getLastTestedDate() {
         return (Date) getLastTestedDateSpinner().getValue();
-        //return data.getLastTestedDateTime();
     }
 
     /**
-     * returns the case ID
+     * Returns the text field for the TestCase's ID.
      * 
-     * @return the testCaseID
+     * @return the text field for the TestCases's ID
      */
     JTextField getTestCaseID() {
         if (testCaseID == null) {
@@ -255,9 +228,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * returns the description
+     * Returns the text area for the TestCases's description.
      * 
-     * @return the testCaseDescription
+     * @return the text area for the TestCases's description
      */
     JTextArea getTestCaseDescription() {
         if (testCaseDescription == null) {
@@ -271,9 +244,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * returns the testing types
+     * Returns the drop down menu used to control TestingTypes.
      * 
-     * @return the testingTypes
+     * @return the drop down menu used to control TestingTypes
      */
     JComboBox<TestingType> getTestingType() {
         if (tcTestingType == null) {
@@ -289,9 +262,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * returns the expected results
+     * Returns the text area for the TestCase's expected results.
      * 
-     * @return the expectedResults
+     * @return the text area for the TestCase's expected results
      */
     JTextArea getExpectedResults() {
         if (expectedResults == null) {
@@ -305,9 +278,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * returns the actual results
+     * Returns the text area for the TestCase's actual results.
      * 
-     * @return the actualResults
+     * @return the text area for the TestCase's actual results
      */
     JTextArea getActualResults() {
         if (actualResults == null) {
@@ -321,9 +294,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * returns the value of pass
+     * Returns the check box used to indicate the TestCase's passing status.
      * 
-     * @return the pass
+     * @return the check box used to indicate the TestCase's passing status
      */
     JCheckBox pass() {
         if (pass == null) {
@@ -335,9 +308,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * returns true if tested
+     * Returns the check box used to indicate the TestCase's testing status.
      * 
-     * @return the tested
+     * @return the check box used to indicate the TestCase's testing status
      */
     JCheckBox getTested() {
         if (tested == null) {
@@ -349,15 +322,10 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * sets the creation date
-     * 
-     * @param date
-     *            the date to set
+     * Sets the date on the testCreationDate JSpinner to the date provided.
+     * @param date the new date of the testCreationDate JSpinner
      */
     void setCreationDate(Date date) {
-//        data = new TestCaseData(data.getTestCaseID(), data.getDescription(), data.getTestingType(), date,
-//                data.getLastTestedDateTime(), data.tested(), data.getExpectedResults(), data.getActualResults(),
-//                data.pass());
         if(date == null) {
             getTestCreationDateSpinner().getModel().setValue(new Date());
         } else {
@@ -367,15 +335,10 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * sets the tested date
-     * 
-     * @param date
-     *            the date to set
+     * Sets the date on the testLastTestedDate JSpinner to the date provided.
+     * @param date the new date of the testLastTestedDate JSpinner
      */
     void setLastTestedDate(Date date) {
-//        data = new TestCaseData(data.getTestCaseID(), data.getDescription(), data.getTestingType(),
-//                data.getCreationDateTime(), date, data.tested(), data.getExpectedResults(), data.getActualResults(),
-//                data.pass());
         if(date == null) {
             getLastTestedDateSpinner().getModel().setValue(new Date());
         } else {
@@ -384,25 +347,25 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * retursn true if added
+     * Returns true if TestCaseEditPane is in add mode.
      * 
-     * @return the add
+     * @return true if TestCaseEditPane is in add mode
      */
     boolean isAddMode() {
         return add;
     }
 
     /**
-     * returns true if edited
+     * Returns true if TestCaseEditPane is in edit mode.
      * 
-     * @return the edit
+     * @return true if TestCaseEditPane is in edit mode
      */
     boolean isEditMode() {
         return edit;
     }
 
     /**
-     * enables add mode
+     * Enables add mode and disables edit mode.
      */
     void enableAdd() {
         if (!add) {
@@ -413,7 +376,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * disables add mode
+     * Disables add mode.
      */
     void disableAdd() {
         add = false;
@@ -421,10 +384,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * enables edit mode
+     * Enables edit mode and disables add mode.
      * 
-     * @param data
-     *            to edit
+     * @param data TestCaseData used to populate the edit area with
      */
     void enableEdit(TestCaseData data) {
         if (!edit) {
@@ -436,7 +398,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * disables edit mode
+     * Disables edit mode.
      */
     void disableEdit() {
         edit = false;
@@ -444,9 +406,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * returns true if the field is not empty
+     * Returns true if the required fields are not empty.
      * 
-     * @return true if the field is not empty
+     * @return true if the required fields are not empty
      */
     boolean fieldsNotEmpty() {
         return tcTestingType.getSelectedItem() != null && testCreationDate.getValue() != null
@@ -454,20 +416,19 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * sets the test case data
+     * Initializes the TestCaseData to the given value.
      * 
-     * @param data
-     *            to set
+     * @param data new TestCaseData
      */
     void setTestCaseData(TestCaseData data) {
         this.data = data;
     }
 
     /**
-     * adds a listener
+     * Adds the given EventListener to the following component fields: testCreationDate, testLastTestedDate,
+     * testCaseDescription, expectedResults, actualResults.
      * 
-     * @param listener
-     *            to add
+     * @param listener EventListern to add to the described fields
      */
     void addFieldListener(EventListener listener) {
         getTestCreationDateSpinner().addChangeListener((ChangeListener) listener);
@@ -481,7 +442,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * fills the field
+     * Fills the fields with the appropriate data from the TestCaseData.
      */
     void fillFields() {
         if (data == null) {
@@ -526,7 +487,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * clears the field
+     * Clears all fields to their default values.
      */
     void clearFields() {
         data = null;
@@ -534,9 +495,9 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     }
 
     /**
-     * returns the field data
+     * Returns the fields as a TestCaseData object.
      * 
-     * @return the field data
+     * @return the fields as a TestCaseData object
      */
     TestCaseData getFields() {
         return new TestCaseData(getTestCaseID().getText(), getTestCaseDescription().getText(),
@@ -545,6 +506,10 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
                 pass().isSelected());
     }
 
+    /**
+     * Updates the tcTestingType field with the provided observable object if it is
+     * a TestingTypeList and displays the change.
+     */
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof TestingTypeList) {
