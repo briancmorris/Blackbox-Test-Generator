@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-// TODO add later
-//import java.util.Arrays;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -26,161 +24,167 @@ import edu.ncsu.csc216.bbtp.model.TestCaseList;
  */
 public class BBTP extends Observable implements Serializable, Observer {
 
-    /** Serial version UID. */
+    /** Serial version UID */
     private static final long serialVersionUID = 34992L;
 
-    /**
-     * Increment for increasing the capacity of the array of TestCaseLists
-     */
+    /** Constant used to resize the array of TestCaseLists */
     private static final int RESIZE = 3;
-    /** A collection of TestCaseList */
+    /** An array of TestCaseLists used to store the TestCaseLists found in this BBTP */
     private TestCaseList[] testCases;
-    /** Number of TestCaseList */
+    /** The number of TestCaseLists contained within this BBTP */
     private int numLists;
-    /** A collection of TestingTypes */
+    /** The TestingTypes contained within this BBTP */
     private TestingTypeList testingTypes;
-    /** Filename for saving the bbtp information */
+    /** The name of the file used for IO operations */
     private String filename;
-    /** True if bbtp has changed since last save */
+    /** Boolean that indicates whether or not this BBTP has changed */
     private boolean changed;
-    /** The next number for a task list id */
+    /** The numeric value of the next TestCaseList ID */
     private int nextTestCaseListNum;
 
     /**
-     * constructor for a BBTP
+     * The constructor for BBTP initializes a new BBTP with an empty
+     * TestingTypeList and TestCaseList named "New List", and adds this BBTP as
+     * an observer to the TestingTypeList and TestCaseList. The observers of
+     * BBTP are notified.
      */
-    public BBTP() 
-    {
-    	testCases = new TestCaseList[RESIZE];
-    	numLists = 0;
-    	testingTypes = new TestingTypeList();
-    	testingTypes.addObserver(this);
-    	nextTestCaseListNum = 1;
-    	addTestCaseList();
-    	changed = false;
-    	notifyObservers(this);
-	}
+    public BBTP() {
+        testCases = new TestCaseList[RESIZE];
+        numLists = 0;
+        testingTypes = new TestingTypeList();
+        testingTypes.addObserver(this);
+        nextTestCaseListNum = 1;
+        addTestCaseList();
+        changed = false;
+        notifyObservers(this);
+    }
 
     /**
-     * returns true if a change occurred
-     * @return true if a change occurred
+     * Returns true if this instance of BBTP has been changed, false if not.
+     * 
+     * @return true if this instance of BBTP has been changed, false if not
      */
-    public boolean isChanged()
-    {
-    	return changed;
+    public boolean isChanged() {
+        return changed;
     }
  
     /**
-     * sets if there has been a change
-     * @param changed stores the value of 
-     * true if change occurred false otherwise
+     * Sets the changed field to the boolean provided and notifies
+     * the observers of BBTP.
+     * @param changed the new value of the changed field
      */
-	public void setChanged(boolean changed)
-	{
-		this.changed = changed;
-	}
+    public void setChanged(boolean changed) {
+        this.changed = changed;
+        //notifyObservers(this);
+    }
 
 	/**
-	 * returns the file name
-	 * @return the file name
+	 * Returns the filename used for IO operations.
+	 * @return the filename used for IO operations
 	 */
-	public String getFilename() 
-	{
-		return filename;
-	}
+    public String getFilename() {
+        return filename;
+    }
 
 	/**
-	 * sets the file name
-	 * @param filename to set
+	 * Changes the name of the file used for IO operations and notifies
+	 * the observers of this BBTP. If the provided filename is null,
+	 * contains all whitespace, or is empty, an IllegalArgumentException
+	 * is thrown.
+	 * @param filename the new filename of the file used for IO operations
+	 * @throws IllegalArgumentException if the filename provided is null,
+	 *         empty, or contains all whitespace
 	 */
-	public void setFilename(String filename) 
-	{
-		if (filename == null || filename.trim().isEmpty())
-		{
-			throw new IllegalArgumentException();
-		}
-		this.filename = filename;
-		
-		setChanged(true);
-		notifyObservers(this);
-	}
+    public void setFilename(String filename) {
+        if (filename == null || filename.trim().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        this.filename = filename;
+
+        setChanged(true);
+        notifyObservers(this);
+    }
 	
-	/**
-	 * returns the next test case number
-	 * @return the next test case number
-	 */
-	private int getNextTestCaseListNum() 
-	{
-		return nextTestCaseListNum;
-	}
+    /**
+     * Returns the value of nextTestCaseListNum.
+     * 
+     * @return the value of nextTestCaseListNum
+     */
+    private int getNextTestCaseListNum() {
+        return nextTestCaseListNum;
+    }
 	
-	/**
-	 * increases the next test case list number
-	 * @param nextTestCaseListNum
-	 */
-	private void incNextTestCaseListNum() 
-	{
-		this.nextTestCaseListNum++;
-	}
+    /**
+     * Increments the value of nextTestCaseListNum.
+     */
+    private void incNextTestCaseListNum() {
+        this.nextTestCaseListNum++;
+    }
 	
-	/**
-	 * returns the number of test case lists
-	 * @return the number of test case lists
-	 */
-	public int getNumTestCaseLists() 
-	{
-		return numLists;
-	}
+    /**
+     * Returns the number of TestCaseLists contained within this BBTP.
+     * 
+     * @return the number of TestCaseLists contained within this BBTP
+     */
+    public int getNumTestCaseLists() {
+        return numLists;
+    }
  
 	/**
-	 * returns the test case list at index provided
-	 * @param index of test case list
-	 * @return the list at the index
+	 * Returns the TestCaseList at the given index. If the
+	 * provided index is less than 0 or greater than or equal
+	 * to numLists, an IndexOutOfBoundsException is thrown.
+	 * @param index of the TestCaseList to retrieve
+	 * @return the TestCaseList at the given index
+	 * @throws IndexOutOfBoundsException if the provided index
+	 *         is less than 0 or greater than or equal to numLists
 	 */
-	public TestCaseList getTestCaseList(int index) 
-	{
-		
-		if (index >= numLists || index < 0)
-		{
-			throw new IndexOutOfBoundsException();
-		}
-		
-		return testCases[index];
-	}
+    public TestCaseList getTestCaseList(int index) {
+
+        if (index >= numLists || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return testCases[index];
+    }
 	
 	/**
-	 * returns the list of types
-	 * @return the list of types
+	 * Returns the TestingTypeList contained within this BBTP.
+	 * @return the TestingTypeList contained within this BBTP
 	 */
-	public TestingTypeList getTestingTypeList() 
-	{
-		return testingTypes;
-	}
+    public TestingTypeList getTestingTypeList() {
+        return testingTypes;
+    }
 
 	/**
-	 * adds the test case to the list
-	 * @return index of new test case
+	 * Adds a TestCaseList named "New List" to the BBTP, returns its index,
+	 * and notifies the observers of this BBTP.
+	 * @return the index of the new TestCaseList
 	 */
-	public int addTestCaseList()
-	{
-		if (numLists + 1 == testCases.length) {
-		    growArray();
-		}
-		
-		testCases[numLists] = new TestCaseList( "New List", "TCL" + getNextTestCaseListNum());
-		testCases[numLists].addObserver(this);
-		setChanged();
+    public int addTestCaseList() {
+        if (numLists + 1 == testCases.length) {
+            growArray();
+        }
+
+        testCases[numLists] = new TestCaseList("New List", "TCL" + getNextTestCaseListNum());
+        testCases[numLists].addObserver(this);
+        setChanged();
         incNextTestCaseListNum();
         numLists++;
-        
+
         setChanged(true);
         notifyObservers(testCases[numLists]);
-		return numLists - 1;
-	}
+        return numLists - 1;
+    }
 	
 	/**
-	 * removes the test case at the given index
-	 * @param index of test case 
+	 * Removes the TestCaseList at the given index and notifies
+	 * the observers of this BBTP of the change. If the index
+	 * is less than 0 or greater than or equal to the number
+	 * of TestCaseLists, an IndexOutOfBoundsException is thrown.
+	 * @param index the index of the TestCaseList to remove
+	 * @throws IndexOutOfBoundsException if the provided index
+	 *         is less than 0 or greater than or equal to numLists
 	 */
 	public void removeTestCaseList(int index)
 	{
@@ -287,7 +291,7 @@ public class BBTP extends Observable implements Serializable, Observer {
     }
     
     /**
-	 * Increases the storage capacity of the list array when required by the add methods.
+	 * Increases the storage capacity of the testCases array when required by the add method.
 	 */
     private void growArray() {
     	TestCaseList[] newList = new TestCaseList[testCases.length * RESIZE];
@@ -298,12 +302,15 @@ public class BBTP extends Observable implements Serializable, Observer {
     }
     
 
-	@Override
-	public void update(Observable o, Object arg) 
-	{
-		setChanged(true);
-		setChanged();
-		notifyObservers(arg);
-	}
+    /**
+     * Changes the changed value of this BBTP to true and notifies the observers of
+     * this change with the provided Object parameter.
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        setChanged(true);
+        setChanged();
+        notifyObservers(arg);
+    }
 
 }

@@ -118,9 +118,9 @@ public class TestCaseList extends Observable implements Tabular, Serializable, O
 
     /**
      * Adds a new TestCase to the list in sorted order by constructing a new
-     * TestCase object with the parameters provided, returns true if successful,
-     * and notifies the observers of this TestCaseList. If the TestCase cannot
-     * be constructed properly, false is returned instead.
+     * TestCase object with the parameters provided, adds this TestCaseList as an observer
+     * to the new TestCase, returns true if successful, and notifies the observers
+     * of this TestCaseList. If the TestCase cannot be constructed properly, false is returned instead.
      * 
      * @param desc the description of the new TestCase
      * @param type the TestingType of the new TestCase

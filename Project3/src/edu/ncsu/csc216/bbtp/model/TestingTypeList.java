@@ -47,8 +47,9 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     }
 
     /**
-     * Constructs a TestingType with the provided name and description and adds
-     * it to the end of the list. Returns true if the new TestingType was added
+     * Constructs a TestingType with the provided name and description, adds this TestingTypeList
+     * as an observer to the new TestingType, adds it to the end of this TestingTypeList, and
+     * notifies the observers of this TestingTypeList. Returns true if the new TestingType was added
      * to the list successfully.
      * @param name the name of the new TestingType
      * @param description the description of the new TestingType
