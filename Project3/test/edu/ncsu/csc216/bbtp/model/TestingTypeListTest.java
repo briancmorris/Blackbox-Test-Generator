@@ -9,7 +9,6 @@ import org.junit.Test;
  * 
  * @author Brian Morris
  * @author Nat Ellis
- *
  */
 public class TestingTypeListTest {
 
@@ -64,7 +63,7 @@ public class TestingTypeListTest {
         assertTrue(test.removeTestingType("TT1"));
 
     }
-    
+
     /**
      * Tests remove method of TestingTypeList.
      */

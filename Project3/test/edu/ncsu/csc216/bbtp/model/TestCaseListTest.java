@@ -8,12 +8,13 @@ import org.junit.Test;
 
 /**
  * The TestCaseListTest class tests the TestCaseList class for completion.
+ * 
  * @author Brian Morris
  * @author Nat Ellis
  */
 public class TestCaseListTest {
 
-	/**
+    /**
      * Tests the constructor of TestCaseList.
      */
     @Test
@@ -22,8 +23,8 @@ public class TestCaseListTest {
         assertTrue(test.isEmpty());
         assertEquals("TestList", test.getName());
     }
-	
-	/**
+
+    /**
      * Tests the add and remove methods of TestCaseList.
      */
     @Test

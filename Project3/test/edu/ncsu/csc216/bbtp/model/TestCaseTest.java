@@ -8,9 +8,9 @@ import org.junit.Test;
 
 /**
  * The TestCaseTest class tests the TestCase class for completion.
+ * 
  * @author Brian Morris
  * @author Nat Ellis
- *
  */
 public class TestCaseTest {
 

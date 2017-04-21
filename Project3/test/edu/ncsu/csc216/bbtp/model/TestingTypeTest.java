@@ -6,6 +6,7 @@ import org.junit.Test;
 
 /**
  * The TestingTypeTest class tests the TestingType class for completion.
+ * 
  * @author Brian Morris
  * @author Nat Ellis
  */
