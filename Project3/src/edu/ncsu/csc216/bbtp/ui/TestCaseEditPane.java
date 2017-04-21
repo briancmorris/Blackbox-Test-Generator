@@ -135,7 +135,7 @@ public class TestCaseEditPane extends JPanel implements Serializable, Observer {
     private void initView() {
         // Row 1
         JPanel p = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        p.add(new JLabel("Testing Case ID: ", SwingConstants.LEFT));
+        p.add(new JLabel("Test Case ID: ", SwingConstants.LEFT));
         p.add(getTestCaseID());
         p.add(new JLabel("Testing Type: "));
         p.add(getTestingType());
