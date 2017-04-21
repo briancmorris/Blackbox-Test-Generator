@@ -7,30 +7,27 @@ import java.util.Observer;
 import edu.ncsu.csc216.bbtp.util.ArrayList;
 
 /**
- * A basic java object for holding a list of types
- * 
- * @author Brian and Nat
- *
+ * The TestingTypeList class stores TestingTypes in an ArrayList with
+ * various getter methods to retrieve the desired object.
+ * @author Brian Morris
+ * @author Nat Ellis
  */
 public class TestingTypeList extends Observable implements Tabular, Serializable, Observer {
 
-    /** Serial version UID. */
+    /** Serial version UID */
     private static final long serialVersionUID = 984509L;
-    /**
-     * holds the list name
-     */
+    /** The name of this TestingTypeList */
     private String name;
-    /**
-     * holds the next type num
-     */
+    /** The numeric value of the next TestingType */
     private int nextTestingTypeNum;
-    /**
-     * holds the list of types
-     */
+    /** The ArrayList that stores the TestingTypes */
     private ArrayList list;
 
     /**
-     * constructor for the type list
+     * The constructor for TestingTypeList initializes an empty
+     * TestingTypeList with the name "Testing Types" and sets
+     * nextTestingTypeNum to 1. After construction, its observers are
+     * notified of the change.
      */
     public TestingTypeList() {
         this.list = new ArrayList();
@@ -42,22 +39,20 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     }
 
     /**
-     * return the name of the list
-     * 
-     * @return the name
+     * Returns the name of this TestingTypeList.
+     * @return the name of this TestingTypeList
      */
     public String getName() {
         return name;
     }
 
     /**
-     * adds the type to the list
-     * 
-     * @param name
-     *            of the type
-     * @param description
-     *            of the type
-     * @return true of added
+     * Constructs a TestingType with the provided name and description and adds
+     * it to the end of the list. Returns true if the new TestingType was added
+     * to the list successfully.
+     * @param name the name of the new TestingType
+     * @param description the description of the new TestingType
+     * @return true if new TestingType is added to the list successfully, false otherwise
      */
     public boolean addTestingType(String name, String description) {
 
@@ -66,19 +61,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
             newType.addObserver(this);
             if (list.size() == 0) {
                 list.add(newType);
-            } 
-            else 
-            {
-            	/*
-                int indexToAdd = 0;
-                TestingType compare = (TestingType) list.get(0);
-                for (int i = 0; i < list.size(); i++) {
-                    compare = (TestingType) list.get(i);
-                    if (compare.compareTo(newType) >= 0) {
-                        indexToAdd++;
-                    }
-                }
-                */
+            } else {
                 list.add(newType);
             }
             incNextTestingTypeNum();
@@ -87,16 +70,18 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
         } catch (IllegalArgumentException e) {
             return false;
         }
-
         return true;
     }
 
     /**
-     * returns the type at the index
+     * Returns the TestingType at the given index. If the index provided is less
+     * than 0 or greater than or equal to the size of the list, an
+     * IndexOutOfBoundsException is thrown.
      * 
-     * @param index
-     *            to retrieve
-     * @return the type at the index
+     * @param index the index of the TestingType to retrieve.
+     * @return the TestingType at the given index
+     * @throws IndexOutOfBoundsException if the given index is less than 0 or greater
+     *         than or equal to the size of the list
      */
     public TestingType getTestingTypeAt(int index) {
         if (index < 0 || index >= size()) {
@@ -106,14 +91,14 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     }
 
     /**
-     * return the ID of the type provided
+     * Returns the index of the TestingType with the given ID. If there is no
+     * TestingType that has that ID in the list, the value of -1 is returned.
      * 
-     * @param id
-     *            the type
-     * @return the index
+     * @param id the ID of the TestingType
+     * @return the index of the TestingType with the given ID, or -1 if this
+     *         list does not contain the TestingType with the associated ID
      */
-    public int indexOf(String id) 
-    {
+    public int indexOf(String id) {
         int out = -1;
         TestingType compare;
         for (int i = 0; i < list.size(); i++) {
@@ -127,53 +112,53 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     }
 
     /**
-     * returns the index of the type with name provided
+     * Returns the index of the TestingType with the given name. If there
+     * is no TestingType that has that name in the list, the value of -1 is
+     * returned.
      * 
-     * @param name
-     *            of the type
-     * @return the type
+     * @param name the name of the TestingType
+     * @return the index of the TestingType with the given ID, or -1 if this list does not contain
+     *         the TestingType with the associated name
      */
-    public int indexOfName(String name) 
-    {
+    public int indexOfName(String name) {
         int out = -1;
         TestingType compare;
-        
-        for (int i = 0; i < this.list.size(); i++) 
-        {
+
+        for (int i = 0; i < this.list.size(); i++) {
             compare = (TestingType) this.list.get(i);
-            if (compare.getName().equals(name)) 
-            {
-            	//out = i;
-            	return list.indexOf(compare);
+            if (compare.getName().equals(name)) {
+                // out = i;
+                return list.indexOf(compare);
             }
         }
         return out;
     }
 
     /**
-     * returns the size
-     * 
-     * @return the size
+     * Returns the number of TestingTypes contained within this TestingTypeList.
+     * @return the number of TestingTypes contained within this TestingTypeList.
      */
     public int size() {
         return list.size();
     }
 
     /**
-     * returns true if its empty
-     * 
-     * @return true if its empty
+     * Returns true if this TestingTypeList is empty, false otherwise.
+     * @return true if this TestingTypeList is empty, false otherwise.
      */
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
     /**
-     * removes the testing type
+     * Removes the TestingType at the given index and returns it. If the index provided
+     * is less than 0 or greater than or equal to the size of this list,
+     * an IndexOutOBoundsException is thrown.
      * 
-     * @param index
-     *            to remove
-     * @return the type removed
+     * @param index the index of the TestingType to remove.
+     * @return the TestingType that was removed
+     * @throws IndexOutOfBoundsException if the given index is less than 0 or greater than or equal to
+     * the size of this list
      */
     public TestingType removeTestingTypeAt(int index) {
         try {
@@ -204,25 +189,6 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
             return true;
         }
         return false;
-        
-        
-        
-        /*
-         *  int index = -1;
-        for (int i = 0; i < list.size(); i++)
-        {
-        	TestingType compare = (TestingType) list.get(i);
-        	if (compare.getTestingTypeID().equals(id))
-        	{
-        		TestingType out = removeTestingTypeAt(index);
-        		out.deleteObserver(this);
-        		setChanged();
-        		notifyObservers(this);
-        		return true;
-        	}
-        }
-        return false;
-         */
     }
 
     /**
