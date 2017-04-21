@@ -18,7 +18,7 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
     private static final long serialVersionUID = 984509L;
     /** The name of this TestingTypeList */
     private String name;
-    /** The numeric value of the next TestingType */
+    /** The numeric value of the next TestingType ID */
     private int nextTestingTypeNum;
     /** The ArrayList that stores the TestingTypes */
     private ArrayList list;
@@ -216,7 +216,6 @@ public class TestingTypeList extends Observable implements Tabular, Serializable
      */
     @Override
     public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
         o = (TestingType) o;
         if (list.contains(o)) {
             setChanged();
