@@ -14,7 +14,7 @@ import org.junit.Test;
 public class TestingTypeListTest {
 
     /**
-     * test constructor
+     * Tests the constructor of TestingTypeList.
      */
     @Test
     public void testConstructor() {
@@ -25,10 +25,10 @@ public class TestingTypeListTest {
     }
 
     /**
-     * test add/remove
+     * Tests the add method of TestingTypeList.
      */
     @Test
-    public void testAddRemove() {
+    public void testAddR() {
         TestingTypeList test = new TestingTypeList();
         test.addTestingType("TestType", "test");
 
@@ -52,43 +52,34 @@ public class TestingTypeListTest {
         assertTrue(testArray[0][1].equals("TestType"));
         assertTrue(testArray[0][2].equals("test"));
 
-      
-
         test.addTestingType("TestType2", "test2");
         test.addTestingType("TestType3", "test3");
-        
+
         testArray = test.get2DArray();
         assertTrue(testArray[1][0].equals("TT2"));
         assertTrue(testArray[1][1].equals("TestType2"));
-        assertTrue(testArray[1][2].equals("test2")); 
-        
-        assertEquals( "TestType2", test.removeTestingTypeAt(1).getName());
+        assertTrue(testArray[1][2].equals("test2"));
+
+        assertEquals("TestType2", test.removeTestingTypeAt(1).getName());
         assertTrue(test.removeTestingType("TT1"));
-        
-        
-        
+
     }
     
     /**
-     * Tests the update method in TestingTypeList.
+     * Tests remove method of TestingTypeList.
      */
     @Test
-    public void testRmove() 
-    {
-    	
-    	TestingTypeList test = new TestingTypeList();
-    	
-    	try 
-        {
-        	test.removeTestingTypeAt(0);
-        	fail();
-		} 
-        catch (Exception e) 
-        {
-			assertEquals(0, test.size());
-		}
-    	
-    	
+    public void testRemoveIdx() {
+
+        TestingTypeList test = new TestingTypeList();
+
+        try {
+            test.removeTestingTypeAt(0);
+            fail();
+        } catch (Exception e) {
+            assertEquals(0, test.size());
+        }
+
         test.addTestingType("TestType1", "test1");
         test.addTestingType("TestType2", "test2");
         test.addTestingType("TestType3", "test3");
@@ -96,23 +87,17 @@ public class TestingTypeListTest {
         test.addTestingType("TestType5", "test5");
         test.addTestingType("TestType6", "test6");
         test.addTestingType("TestType7", "test7");
-        
+
         assertEquals("TestType4", test.removeTestingTypeAt(3).getName());
-        
-        try 
-        {
-        	test.removeTestingTypeAt(6);
-        	fail();
-		} 
-        catch (Exception e) 
-        {
-			assertEquals(6, test.size());
-		}
-        
-        
-        
+
+        try {
+            test.removeTestingTypeAt(6);
+            fail();
+        } catch (Exception e) {
+            assertEquals(6, test.size());
+        }
+
     }
-    
 
     /**
      * Tests the update method in TestingTypeList.
